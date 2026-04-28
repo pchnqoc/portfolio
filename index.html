@@ -3,1071 +3,1527 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Huynh Thi Bich Ngoc — Odoo ERP Business Analyst</title>
+<title>Huynh Thi Bich Ngoc — ERP Business Analyst</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600;1,900&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --white:#ffffff;
-  --bg:#f8f7f4;
-  --bg2:#f0ede8;
-  --bg3:#e8e4dd;
-  --ink:#18171a;
-  --ink2:#4a4650;
-  --ink3:#9590a0;
-  --accent:#2563eb;
-  --accent2:#1d4ed8;
-  --accent-bg:#eff4ff;
-  --accent-border:#bfcfff;
-  --green:#16a34a;
-  --green-bg:#f0fdf4;
-  --green-border:#86efac;
-  --amber:#d97706;
-  --amber-bg:#fffbeb;
-  --amber-border:#fcd34d;
-  --rose:#e11d48;
-  --rose-bg:#fff1f2;
-  --rose-border:#fda4af;
-  --border:#e5e2db;
-  --border2:#d4d0c8;
-  --radius:12px;
-  --radius-lg:18px;
-  --radius-xl:24px;
-  --shadow-sm:0 1px 3px rgba(24,23,26,0.06),0 1px 2px rgba(24,23,26,0.04);
-  --shadow:0 4px 16px rgba(24,23,26,0.07),0 1px 4px rgba(24,23,26,0.05);
-  --shadow-lg:0 12px 40px rgba(24,23,26,0.1),0 4px 12px rgba(24,23,26,0.06);
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ═══════════════════════════════════════
+   DESIGN TOKENS
+═══════════════════════════════════════ */
+:root {
+  --red:        #7a0e0e;
+  --red-deep:   #560a0a;
+  --red-mid:    #8e1212;
+  --cream:      #f5edd8;       /* primary cream — bright enough on dark red */
+  --cream-2:    #ede0c6;
+  --cream-3:    #ddd0b4;       /* used for outlines / stroke */
+  --cream-body: #e8dcc8;       /* body text on red — high contrast, warm */
+  --cream-dim:  #c8bca6;       /* secondary text on red — still readable */
+  --ink:        #1e120c;       /* text on cream backgrounds */
+  --ink-2:      #3a2416;
+  --ink-3:      #5e4838;
+  --gold:       #c49a3c;
+  --gold-lt:    #ddb84e;
+  --rule-dark:  rgba(30,18,12,0.14);
+  --rule-red:   rgba(245,237,216,0.16);
+  --rule-red2:  rgba(245,237,216,0.08);
 }
-html{scroll-behavior:smooth}
-body{font-family:'Sora',sans-serif;background:var(--bg);color:var(--ink);font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased}
 
-/* ── SCROLLBAR ── */
-::-webkit-scrollbar{width:6px}
-::-webkit-scrollbar-track{background:var(--bg2)}
-::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
+html { scroll-behavior: smooth; }
 
-/* ── NAV ── */
-nav{
-  position:fixed;top:0;left:0;right:0;z-index:200;
-  height:58px;display:flex;align-items:center;
-  padding:0 2.5rem;
-  background:rgba(248,247,244,0.85);
-  backdrop-filter:blur(16px);
-  border-bottom:1px solid var(--border);
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--red);
+  color: var(--cream);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
 }
-.nav-inner{width:100%;max-width:1180px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
-.nav-logo{font-size:13.5px;font-weight:600;letter-spacing:-0.01em;color:var(--ink);text-decoration:none}
-.nav-logo span{color:var(--accent)}
-.nav-links{display:flex;gap:0.125rem;align-items:center}
-.nav-links a{font-size:13px;color:var(--ink2);text-decoration:none;padding:5px 11px;border-radius:7px;transition:all .15s;font-weight:400}
-.nav-links a:hover{background:var(--bg3);color:var(--ink)}
-.nav-pill{background:var(--ink) !important;color:var(--white) !important;font-weight:500 !important}
-.nav-pill:hover{background:#2d2b32 !important}
 
-/* ── LAYOUT ── */
-.wrap{max-width:1180px;margin:0 auto;padding:0 2.5rem}
-section{padding:88px 0}
-.sec-eyebrow{display:flex;align-items:center;gap:8px;margin-bottom:10px}
-.eyebrow-line{width:20px;height:1.5px;background:var(--ink3)}
-.eyebrow-text{font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink3)}
-.sec-title{font-size:clamp(26px,3.5vw,36px);font-weight:700;letter-spacing:-0.025em;line-height:1.1;color:var(--ink);margin-bottom:10px}
-.sec-sub{font-size:15px;color:var(--ink2);line-height:1.72;max-width:560px;margin-bottom:3rem}
-
-/* ── HERO ── */
-#hero{
-  padding-top:142px;padding-bottom:88px;
-  position:relative;overflow:hidden;
-  background:var(--white);
-  border-bottom:1px solid var(--border);
+/* subtle film grain */
+body::after {
+  content: '';
+  position: fixed; inset: 0; z-index: 9999; pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23g)' opacity='1'/%3E%3C/svg%3E");
+  opacity: 0.025;
 }
-.hero-bg-grid{
-  position:absolute;inset:0;
-  background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);
-  background-size:52px 52px;
-  opacity:.35;
-  mask-image:radial-gradient(ellipse 80% 80% at 50% 0%,black 40%,transparent 100%);
+
+::-webkit-scrollbar { width: 2px; }
+::-webkit-scrollbar-track { background: var(--red-deep); }
+::-webkit-scrollbar-thumb { background: var(--gold); }
+
+/* ═══════════════════════════════════════
+   NAV
+═══════════════════════════════════════ */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 400;
+  height: 54px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 3.5rem;
+  background: var(--red-deep);
+  border-bottom: 1px solid var(--rule-red);
 }
-.hero-layout{display:grid;grid-template-columns:1fr 380px;gap:5rem;align-items:center;position:relative}
-.hero-badge{
-  display:inline-flex;align-items:center;gap:7px;
-  background:var(--accent-bg);border:1px solid var(--accent-border);
-  color:var(--accent);font-size:11.5px;font-weight:500;
-  padding:5px 13px;border-radius:100px;margin-bottom:1.75rem;
+.nav-wordmark {
+  font-family: 'EB Garamond', serif;
+  font-size: 13px; letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--cream-body); text-decoration: none;
 }
-.badge-dot{width:7px;height:7px;border-radius:50%;background:var(--accent);animation:blip 2.2s ease-in-out infinite}
-@keyframes blip{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.7)}}
-h1{font-size:clamp(38px,5.5vw,60px);font-weight:700;letter-spacing:-0.035em;line-height:1.04;color:var(--ink);margin-bottom:1.5rem}
-h1 .accent-word{color:var(--accent)}
-.hero-desc{font-size:16.5px;color:var(--ink2);max-width:500px;line-height:1.75;margin-bottom:2.5rem}
-.hero-actions{display:flex;gap:.75rem;flex-wrap:wrap}
-.btn{display:inline-flex;align-items:center;gap:6px;font-family:'Sora',sans-serif;font-size:13.5px;font-weight:500;padding:10px 20px;border-radius:9px;cursor:pointer;border:none;text-decoration:none;transition:all .2s}
-.btn-dark{background:var(--ink);color:var(--white)}
-.btn-dark:hover{background:#2d2b32;transform:translateY(-1px);box-shadow:var(--shadow)}
-.btn-ghost{background:transparent;color:var(--ink2);border:1px solid var(--border2)}
-.btn-ghost:hover{background:var(--bg2);color:var(--ink);border-color:var(--border2)}
-
-/* Hero profile card */
-.hero-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius-xl);padding:1.75rem;box-shadow:var(--shadow-lg)}
-.hc-top{display:flex;align-items:center;gap:12px;padding-bottom:1.25rem;margin-bottom:1.25rem;border-bottom:1px solid var(--border)}
-.hc-ava{width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--accent-bg),var(--accent-border));display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;color:var(--accent);flex-shrink:0;letter-spacing:.02em}
-.hc-name{font-weight:600;font-size:13.5px;color:var(--ink);line-height:1.3}
-.hc-role{font-size:11.5px;color:var(--ink3);margin-top:2px}
-.hc-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
-.hc-stat{background:var(--bg);border-radius:10px;padding:12px 14px}
-.hc-stat-label{font-size:10.5px;color:var(--ink3);margin-bottom:3px;font-weight:500;letter-spacing:.02em}
-.hc-stat-val{font-size:13.5px;font-weight:600;color:var(--ink)}
-.hc-chips{display:flex;flex-wrap:wrap;gap:6px}
-.chip{font-size:11px;font-weight:500;padding:3px 10px;border-radius:100px}
-.chip-blue{background:var(--accent-bg);color:var(--accent);border:1px solid var(--accent-border)}
-.chip-green{background:var(--green-bg);color:var(--green);border:1px solid var(--green-border)}
-.chip-amber{background:var(--amber-bg);color:var(--amber);border:1px solid var(--amber-border)}
-
-/* ── SKILLS BA ── */
-#skills-ba{background:var(--bg)}
-.skills-masonry{columns:2;gap:1.25rem}
-.skill-card{
-  break-inside:avoid;
-  background:var(--white);
-  border:1px solid var(--border);
-  border-radius:var(--radius-lg);
-  padding:1.5rem 1.75rem;
-  margin-bottom:1.25rem;
-  transition:border-color .2s,box-shadow .2s,transform .2s;
+.nav-wordmark em { font-style: normal; color: var(--gold); }
+.nav-menu { display: flex; align-items: center; }
+.nav-menu a {
+  font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--cream-dim); text-decoration: none; padding: 6px 14px;
+  transition: color 0.2s;
+  border-left: 1px solid var(--rule-red);
 }
-.skill-card:hover{border-color:var(--border2);box-shadow:var(--shadow);transform:translateY(-2px)}
-.skill-card-icon{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:17px;margin-bottom:1rem}
-.icon-blue{background:var(--accent-bg)}
-.icon-green{background:var(--green-bg)}
-.icon-amber{background:var(--amber-bg)}
-.icon-rose{background:var(--rose-bg)}
-.skill-card-title{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:.5rem}
-.skill-card p{font-size:13px;color:var(--ink2);line-height:1.65;margin-bottom:.75rem}
-.skill-card p:last-child{margin-bottom:0}
-.tag-row{display:flex;flex-wrap:wrap;gap:5px;margin-top:.625rem}
-.stag{font-size:11px;color:var(--ink2);background:var(--bg2);border:1px solid var(--border);padding:2px 9px;border-radius:100px;font-family:'DM Mono',monospace}
+.nav-menu a:last-child { border-right: 1px solid var(--rule-red); }
+.nav-menu a:hover { color: var(--cream); }
+.nav-cta { background: var(--cream) !important; color: var(--red) !important; font-weight: 500 !important; }
+.nav-cta:hover { background: var(--gold-lt) !important; color: var(--red-deep) !important; }
 
-/* Fit Gap ladder */
-.fitgap{display:flex;flex-direction:column;gap:7px;margin-top:.75rem}
-.fg-step{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:9px;border-left:3px solid transparent}
-.fg-step.g{background:var(--green-bg);border-color:var(--green)}
-.fg-step.b{background:var(--accent-bg);border-color:var(--accent)}
-.fg-step.a{background:var(--amber-bg);border-color:var(--amber)}
-.fg-step.r{background:var(--rose-bg);border-color:var(--rose)}
-.fg-num{font-family:'DM Mono',monospace;font-size:11px;min-width:18px;font-weight:500}
-.g .fg-num{color:var(--green)}.b .fg-num{color:var(--accent)}.a .fg-num{color:var(--amber)}.r .fg-num{color:var(--rose)}
-.fg-title{font-size:12.5px;font-weight:600;color:var(--ink)}
-.fg-desc{font-size:11.5px;color:var(--ink3);margin-top:1px}
+/* ═══════════════════════════════════════
+   LAYOUT HELPERS
+═══════════════════════════════════════ */
+.page-section { position: relative; overflow: hidden; }
+.cream-section  { background: var(--cream);   color: var(--ink); }
+.cream-2-section{ background: var(--cream-2); color: var(--ink); }
+.red-deep-section { background: var(--red-deep); }
 
-/* Phase list */
-.phase-list{display:flex;flex-direction:column;gap:6px;margin-top:.75rem}
-.phase-item{display:flex;align-items:center;gap:10px;font-size:12.5px;color:var(--ink2)}
-.phase-num{font-family:'DM Mono',monospace;font-size:11px;color:var(--accent);background:var(--accent-bg);width:24px;height:24px;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:500}
-.phase-name{font-weight:500;color:var(--ink)}
-.phase-sub{color:var(--ink3);font-size:11.5px}
-
-/* ── ODOO ARCHITECTURE ── */
-#odoo-arch{background:var(--white);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
-.arch-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
-.arch-card{
-  background:var(--bg);border:1px solid var(--border);
-  border-radius:var(--radius-lg);padding:1.625rem 1.5rem;
-  transition:all .2s;cursor:default;
+.inner {
+  max-width: 1200px; margin: 0 auto;
+  padding: 0 3.5rem; position: relative; z-index: 2;
 }
-.arch-card:hover{background:var(--white);border-color:var(--border2);box-shadow:var(--shadow);transform:translateY(-2px)}
-.arch-icon{font-size:22px;margin-bottom:.875rem}
-.arch-title{font-size:13.5px;font-weight:600;color:var(--ink);margin-bottom:.625rem}
-.arch-card p{font-size:12.5px;color:var(--ink2);line-height:1.65;margin-bottom:.625rem}
-.arch-card p:last-child{margin-bottom:0}
-.mono-block{font-family:'DM Mono',monospace;font-size:11px;background:var(--bg3);color:var(--ink2);padding:8px 12px;border-radius:7px;margin-top:.625rem;line-height:1.6;border-left:2px solid var(--border2)}
 
-/* Security layers */
-.sec-layers{display:flex;flex-direction:column;gap:6px;margin-top:.75rem}
-.sec-layer{display:flex;align-items:flex-start;gap:9px;padding:8px 10px;background:var(--white);border:1px solid var(--border);border-radius:8px;transition:border-color .15s}
-.sec-layer:hover{border-color:var(--border2)}
-.sec-layer-dot{width:8px;height:8px;border-radius:50%;margin-top:4px;flex-shrink:0}
-.d-blue{background:var(--accent)}.d-green{background:var(--green)}.d-amber{background:var(--amber)}.d-rose{background:var(--rose)}
-.sec-layer-title{font-size:12px;font-weight:600;color:var(--ink)}
-.sec-layer-desc{font-size:11.5px;color:var(--ink3);margin-top:1px}
-
-/* ── PROJECTS ── */
-#projects{background:var(--bg)}
-.proj-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.25rem}
-.proj-card{
-  background:var(--white);
-  border:1px solid var(--border);
-  border-radius:var(--radius-lg);
-  overflow:hidden;
-  transition:border-color .2s,box-shadow .2s;
+/* ═══════════════════════════════════════
+   SHARED TYPOGRAPHY
+═══════════════════════════════════════ */
+.eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+  display: flex; align-items: center; gap: 10px;
 }
-.proj-card:hover{border-color:var(--border2);box-shadow:var(--shadow)}
-.proj-header{
-  padding:1.5rem 1.75rem;
-  cursor:pointer;
-  display:flex;align-items:center;justify-content:space-between;
-  gap:1rem;user-select:none;
-}
-.proj-header-left{display:flex;align-items:center;gap:.875rem}
-.proj-idx{font-family:'DM Mono',monospace;font-size:11.5px;color:var(--ink3);background:var(--bg2);padding:4px 8px;border-radius:6px;font-weight:500;flex-shrink:0}
-.proj-title{font-size:15px;font-weight:600;color:var(--ink)}
-.proj-subtitle{font-size:12px;color:var(--ink3);margin-top:2px}
-.proj-badge{font-size:10.5px;font-weight:600;padding:3px 9px;border-radius:100px;white-space:nowrap;flex-shrink:0}
-.pb-blue{background:var(--accent-bg);color:var(--accent)}
-.pb-green{background:var(--green-bg);color:var(--green)}
-.pb-amber{background:var(--amber-bg);color:var(--amber)}
-.pb-rose{background:var(--rose-bg);color:var(--rose)}
-.chevron{width:18px;height:18px;flex-shrink:0;color:var(--ink3);transition:transform .25s}
-.proj-card.open .chevron{transform:rotate(180deg)}
-.proj-body{
-  display:none;border-top:1px solid var(--border);
-  padding:1.5rem 1.75rem;
-  animation:slideDown .25s ease;
-}
-@keyframes slideDown{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
-.proj-card.open .proj-body{display:block}
+.eyebrow-cream { color: var(--cream-dim); }
+.eyebrow-ink   { color: var(--ink-3); }
+.eyebrow-gold  { color: var(--gold); }
+.eyebrow::before { content:''; display:block; width:22px; height:1px; background:currentColor; }
+.rule-gold { width:40px; height:1.5px; background:var(--gold); display:block; }
 
-/* project body content */
-.flow-row{display:flex;align-items:center;flex-wrap:wrap;gap:5px;margin-bottom:1.25rem}
-.flow-node{font-family:'DM Mono',monospace;font-size:11px;background:var(--bg2);border:1px solid var(--border);color:var(--ink2);padding:4px 10px;border-radius:6px}
-.flow-arr{color:var(--ink3);font-size:12px}
-.pbg{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;margin-bottom:1.25rem}
-.pb-section-title{font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3);margin-bottom:.5rem}
-.pb-section p{font-size:12.5px;color:var(--ink2);line-height:1.65}
-.pb-section ul{list-style:none;padding:0}
-.pb-section li{font-size:12.5px;color:var(--ink2);padding:2px 0 2px 14px;position:relative;line-height:1.55}
-.pb-section li::before{content:'·';position:absolute;left:0;color:var(--accent);font-weight:800;font-size:14px}
-.impact-strip{background:var(--green-bg);border:1px solid var(--green-border);border-radius:10px;padding:14px 16px}
-.impact-label{font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--green);margin-bottom:4px}
-.impact-strip p{font-size:12.5px;color:#14532d;line-height:1.65}
-.db-block{font-family:'DM Mono',monospace;font-size:11px;background:var(--bg);border:1px solid var(--border);padding:10px 12px;border-radius:8px;line-height:1.75;color:var(--ink2);margin-bottom:.75rem}
-.db-model{color:var(--accent);font-weight:500}
-.db-field{color:var(--green)}
-.db-type{color:var(--amber)}
-.db-comment{color:var(--ink3)}
-
-/* ── CERTIFICATES ── */
-#certs{background:var(--white);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
-.cert-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
-.cert-card{
-  background:var(--bg);border:1px solid var(--border);
-  border-radius:var(--radius-lg);padding:2rem 1.75rem;
-  display:flex;flex-direction:column;
-  transition:all .2s;
+/* ═══════════════════════════════════════
+   GHOST / BLEED DECORATIVE TYPE
+═══════════════════════════════════════ */
+.bleed-type {
+  position: absolute;
+  font-family: 'Playfair Display', serif;
+  font-weight: 900; line-height: 0.8;
+  pointer-events: none; user-select: none; z-index: 1;
 }
-.cert-card:hover{background:var(--white);border-color:var(--border2);box-shadow:var(--shadow);transform:translateY(-3px)}
-.cert-icon{width:52px;height:52px;border-radius:14px;background:var(--accent-bg);border:1px solid var(--accent-border);display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:1.25rem}
-.cert-title{font-size:15px;font-weight:600;color:var(--ink);line-height:1.3;margin-bottom:.625rem}
-.cert-org{font-size:12px;color:var(--ink3);margin-bottom:auto;padding-bottom:1.5rem}
-.btn-cert{display:inline-flex;align-items:center;gap:6px;font-family:'Sora',sans-serif;font-size:12.5px;font-weight:500;color:var(--accent);background:var(--accent-bg);border:1px solid var(--accent-border);padding:8px 16px;border-radius:8px;text-decoration:none;transition:all .15s;cursor:pointer}
-.btn-cert:hover{background:var(--accent);color:var(--white);border-color:var(--accent)}
+.bleed-on-red   { color: transparent; -webkit-text-stroke: 1px rgba(245,237,216,0.07); }
+.bleed-on-cream { color: transparent; -webkit-text-stroke: 1px rgba(120,14,14,0.05);  }
 
-/* ── CONTACT ── */
-#contact{background:var(--ink)}
-#contact .sec-eyebrow .eyebrow-line{background:rgba(255,255,255,.25)}
-#contact .eyebrow-text{color:rgba(255,255,255,.4)}
-#contact .sec-title{color:var(--white)}
-#contact .sec-sub{color:rgba(255,255,255,.5)}
-.contact-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:0}
-.contact-card{
-  background:rgba(255,255,255,.06);
-  border:1px solid rgba(255,255,255,.1);
-  border-radius:var(--radius-lg);padding:1.625rem;
+/* ═══════════════════════════════════════
+   ██ HERO
+═══════════════════════════════════════ */
+#hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding-top: 54px;
+}
+
+/* LEFT — deep red */
+.hero-left {
+  background: var(--red-deep);
+  padding: 80px 60px 80px 3.5rem;
+  display: flex; flex-direction: column; justify-content: center;
+  position: relative; overflow: hidden;
+  border-right: 1px solid var(--rule-red);
+}
+.bleed-type.h-bleed {
+  font-size: clamp(90px,13vw,180px);
+  bottom: -4%; left: -3%; font-style: italic;
+}
+
+/* availability badge */
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  border: 1px solid rgba(196,154,60,.45);
+  padding: 5px 14px; margin-bottom: 2.5rem;
+  font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--gold); width: fit-content;
+}
+.hero-badge-dot { width:5px; height:5px; border-radius:50%; background:var(--gold); animation:pulse 2.5s ease-in-out infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.2} }
+
+h1.hero-name {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(48px,6vw,82px);
+  font-weight: 900; line-height: 0.9;
+  letter-spacing: -0.03em;
+  color: var(--cream);       /* FIX: solid cream, no opacity */
+  margin-bottom: 0.25em;
+}
+h1.hero-name .outline-line {
+  display: block; font-style: italic;
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--cream-3);
+}
+.hero-role {
+  font-family: 'EB Garamond', serif;
+  font-size: clamp(16px,1.9vw,20px);
+  font-style: italic; color: var(--gold);
+  letter-spacing: 0.04em; margin-bottom: 2rem;
+  display: flex; align-items: center; gap: 12px;
+}
+.hero-role::before { content:''; display:block; width:28px; height:1px; background:var(--gold); }
+
+/* FIX: raised font size + solid color */
+.hero-desc {
+  font-family: 'EB Garamond', serif;
+  font-size: 18px;                /* was 14px */
+  font-weight: 400; line-height: 1.82;
+  color: var(--cream-body);       /* solid, not dimmed */
+  max-width: 460px; margin-bottom: 2.75rem;
+}
+
+.hero-actions { display: flex; gap: .75rem; flex-wrap: wrap; }
+.btn-cream {
+  font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
+  font-weight: 500; color: var(--red-deep);
+  background: var(--cream); padding: 12px 26px;
+  text-decoration: none; transition: all 0.25s; display: inline-block;
+}
+.btn-cream:hover { background: var(--gold-lt); }
+.btn-outline-cream {
+  font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--cream-body);       /* FIX: readable */
+  border: 1px solid rgba(245,237,216,0.45); padding: 11px 26px;
+  text-decoration: none; transition: all 0.25s; display: inline-block;
+}
+.btn-outline-cream:hover { border-color: var(--gold); color: var(--gold); }
+
+/* RIGHT — cream panel */
+.hero-right {
+  background: var(--cream);
+  padding: 60px 3.5rem 60px 60px;
+  display: flex; flex-direction: column; justify-content: center;
+  gap: 2.5rem;
+  position: relative; overflow: hidden;
+}
+.bleed-type.hr-bleed {
+  font-size: clamp(80px,11vw,160px);
+  top: -4%; right: -2%; font-style: italic;
+}
+
+/* ── AVATAR — premium treatment ── */
+.hero-avatar-wrap {
+  position: relative; width: fit-content;
+}
+.hero-avatar-frame {
+  width: 180px; height: 220px;
+  border: 1px solid var(--rule-dark);
+  overflow: hidden;
+  position: relative;
+  box-shadow:
+    6px 6px 0 0 var(--red),
+    8px 8px 0 0 rgba(30,18,12,0.12),
+    0 20px 60px rgba(30,18,12,0.18);
+  flex-shrink: 0;
+}
+.hero-avatar-frame img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center top;
+  filter: grayscale(100%) contrast(1.08) brightness(0.96);
+  display: block;
+  transition: filter 0.5s ease;
+}
+.hero-avatar-frame:hover img { filter: grayscale(60%) contrast(1.05) brightness(1.0); }
+/* gold corner accent */
+.hero-avatar-frame::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0;
+  width: 100%; height: 3px;
+  background: var(--gold);
+}
+.hero-avatar-label {
+  position: absolute; bottom: -24px; left: 0;
+  font-family: 'DM Mono', monospace;
+  font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+/* profile card */
+.hero-card {
+  border: 1px solid var(--rule-dark);
+  background: var(--cream-2);
+  position: relative; z-index: 2;
+}
+.hc-top {
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--rule-dark);
+  display: flex; align-items: center; gap: 12px;
+}
+.hc-ava-fallback {
+  width: 42px; height: 42px;
+  border: 1px solid var(--rule-dark);
+  background: var(--red-deep); flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Playfair Display', serif; font-size: 13px;
+  font-weight: 700; color: var(--cream);
+}
+.hc-n { font-family:'EB Garamond',serif; font-size:15px; color:var(--ink); font-weight:500; }
+.hc-r { font-size:11px; color:var(--ink-3); letter-spacing:.04em; margin-top:2px; }
+.hc-stats { display:grid; grid-template-columns:1fr 1fr; }
+.hc-stat {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--rule-dark);
+  border-right: 1px solid var(--rule-dark);
+}
+.hc-stat:nth-child(even) { border-right:none; }
+.hc-stat:nth-last-child(-n+2) { border-bottom:none; }
+.hc-sl { font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-3); margin-bottom:3px; }
+.hc-sv { font-size:13px; font-weight:500; color:var(--ink); }
+.hc-sv.open { color:var(--red); }
+.hc-chips {
+  padding: 1rem 1.5rem;
+  display: flex; flex-wrap: wrap; gap: 5px;
+  border-top: 1px solid var(--rule-dark);
+}
+.hchip { font-size:10px; letter-spacing:.08em; text-transform:uppercase; padding:3px 9px; border:1px solid var(--rule-dark); color:var(--ink-3); }
+.hchip.accent { background:var(--red-deep); color:var(--cream-body); border-color:var(--red-deep); }
+
+/* hero ticker strip */
+.hero-strip {
+  background: var(--red); grid-column:1/-1;
+  padding: 1.1rem 3.5rem;
+  display: flex; align-items: center; gap: 2.5rem;
+  border-top: 1px solid var(--rule-red);
+}
+.hs-item {
+  display:flex; align-items:center; gap:9px;
+  font-size: 11px; letter-spacing:.12em; text-transform:uppercase;
+  color: var(--cream-body);   /* FIX: solid readable */
+}
+.hs-item::before { content:''; width:4px; height:4px; background:var(--gold); border-radius:50%; flex-shrink:0; }
+.hs-sep { flex:1; height:1px; background:var(--rule-red); }
+
+/* ═══════════════════════════════════════
+   ██ BA SKILLS — cream section
+═══════════════════════════════════════ */
+#skills { background:var(--cream); padding:100px 0 0; color:var(--ink); }
+.bleed-type.sk-bleed { font-size:clamp(100px,14vw,200px); bottom:0; right:-1%; font-style:italic; }
+
+.skills-masthead {
+  display:grid; grid-template-columns:280px 1fr;
+  border-bottom:1px solid var(--rule-dark);
+  padding-bottom:3rem;
+}
+.skills-masthead-left { padding-right:3rem; border-right:1px solid var(--rule-dark); }
+.skills-sec-num {
+  font-family:'Playfair Display',serif;
+  font-size:clamp(80px,10vw,120px);
+  font-weight:900; font-style:italic;
+  color:var(--red-deep); line-height:.85;
+  opacity:.1; margin-bottom:1.5rem;
+}
+.skills-masthead-right { padding-left:3.5rem; }
+.skills-big-title {
+  font-family:'Playfair Display',serif;
+  font-size:clamp(34px,4.5vw,56px);
+  font-weight:700; line-height:.95; letter-spacing:-.025em;
+  color:var(--ink); margin-bottom:1.25rem;
+}
+.skills-big-title em { font-style:italic; color:var(--red); }
+.skills-intro {
+  font-family:'EB Garamond',serif;
+  font-size: 18px;        /* FIX: raised */
+  line-height:1.82; color:var(--ink-2); max-width:580px;
+}
+
+.skills-grid {
+  display:grid; grid-template-columns:repeat(3,1fr);
+  border-top:1px solid var(--rule-dark);
+}
+.sk-card {
+  padding:2.25rem 2rem;
+  border-right:1px solid var(--rule-dark);
+  border-bottom:1px solid var(--rule-dark);
+  position:relative; overflow:hidden; transition:background .3s;
+}
+.sk-card:nth-child(3n) { border-right:none; }
+.sk-card:hover { background:var(--cream-2); }
+.sk-card::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:2px;
+  background:var(--red); transform:scaleX(0); transform-origin:left;
+  transition:transform .4s ease;
+}
+.sk-card:hover::before { transform:scaleX(1); }
+.sk-num { font-family:'DM Mono',monospace; font-size:10px; color:var(--red); margin-bottom:1rem; display:block; letter-spacing:.1em; }
+.sk-title { font-family:'Playfair Display',serif; font-size:18px; font-weight:700; color:var(--ink); line-height:1.25; margin-bottom:.75rem; }
+.sk-body {
+  font-size: 15px;       /* FIX: raised from 13px */
+  color:var(--ink-2); line-height:1.75; font-weight:300; margin-bottom:.75rem;
+}
+.sk-tags { display:flex; flex-wrap:wrap; gap:5px; margin-top:.875rem; }
+.sk-tag { font-size:10px; letter-spacing:.08em; text-transform:uppercase; padding:2px 8px; border:1px solid var(--rule-dark); color:var(--ink-3); }
+
+/* Fit-Gap ladder */
+.fg-steps { margin-top:.875rem; display:flex; flex-direction:column; gap:4px; }
+.fg-step { display:flex; align-items:flex-start; gap:8px; padding:7px 10px; border-left:2px solid transparent; }
+.fg-step.g { background:rgba(40,100,40,.07); border-color:#4a8a4a; }
+.fg-step.b { background:rgba(30,60,140,.06); border-color:#3a6aaa; }
+.fg-step.a { background:rgba(140,90,10,.07); border-color:var(--gold); }
+.fg-step.r { background:rgba(120,14,14,.07); border-color:var(--red); }
+.fg-step-n { font-family:'DM Mono',monospace; font-size:10px; min-width:16px; margin-top:1px; }
+.fg-step.g .fg-step-n { color:#4a8a4a; }
+.fg-step.b .fg-step-n { color:#3a6aaa; }
+.fg-step.a .fg-step-n { color:var(--gold); }
+.fg-step.r .fg-step-n { color:var(--red); }
+.fg-step-t { font-size:13px; font-weight:500; color:var(--ink); }
+.fg-step-d { font-size:12px; color:var(--ink-3); margin-top:1px; }
+
+/* Phase steps */
+.phase-list { margin-top:.875rem; display:flex; flex-direction:column; gap:5px; }
+.phase-row { display:flex; align-items:center; gap:9px; }
+.phase-n {
+  font-family:'DM Mono',monospace; font-size:10px;
+  background:var(--red-deep); color:var(--cream-body);
+  width:22px; height:22px; display:flex; align-items:center; justify-content:center;
+  flex-shrink:0; font-weight:500;
+}
+.phase-name { font-size:13px; font-weight:500; color:var(--ink); }
+.phase-sub  { font-size:12px; color:var(--ink-3); margin-left:3px; }
+
+/* ═══════════════════════════════════════
+   ██ ODOO ARCH — red-deep section
+═══════════════════════════════════════ */
+#arch { background:var(--red-deep); padding:100px 0; color:var(--cream); }
+.bleed-type.ar-bleed { font-size:clamp(100px,13vw,190px); top:-5%; left:-2%; font-style:italic; }
+
+.arch-head {
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:4rem; align-items:end;
+  padding-bottom:3rem; border-bottom:1px solid var(--rule-red); margin-bottom:3rem;
+}
+.arch-head-title {
+  font-family:'Playfair Display',serif;
+  font-size:clamp(32px,4.5vw,54px); font-weight:700; line-height:.95;
+  letter-spacing:-.025em; color:var(--cream);
+}
+.arch-head-title em { font-style:italic; color:transparent; -webkit-text-stroke:1px var(--cream-3); }
+.arch-head-body {
+  font-family:'EB Garamond',serif;
+  font-size: 18px;         /* FIX: raised */
+  line-height:1.82; color:var(--cream-body);  /* FIX: solid */
+}
+
+.arch-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--rule-red); }
+.arch-card { background:var(--red-deep); padding:2rem 1.875rem; transition:background .25s; }
+.arch-card:hover { background:var(--red); }
+.arch-card-n { font-family:'DM Mono',monospace; font-size:10px; color:var(--gold); margin-bottom:1rem; display:block; letter-spacing:.1em; }
+.arch-card-title { font-family:'Playfair Display',serif; font-size:17px; font-weight:700; color:var(--cream); margin-bottom:.625rem; line-height:1.25; }
+.arch-card-body {
+  font-size: 15px;         /* FIX: raised from 12.5px */
+  color:var(--cream-body); /* FIX: solid readable */
+  line-height:1.72; font-weight:300;
+}
+
+.code-blk {
+  font-family:'DM Mono',monospace; font-size:11px;
+  background:rgba(0,0,0,.4);
+  border-left:2px solid var(--gold);
+  padding:12px 14px; margin-top:.875rem; line-height:1.8;
+  color: var(--cream-body);  /* FIX: readable */
+}
+.c-model { color:var(--gold-lt); }
+.c-field  { color:#a8c9a0; }
+.c-type   { color:#c9b0a0; }
+.c-com    { color:#9a8a78; }  /* FIX: raised from #7a6a5a */
+
+.sec-rows { margin-top:1rem; display:flex; flex-direction:column; gap:5px; }
+.sec-row { display:flex; align-items:flex-start; gap:9px; padding:8px 10px; background:rgba(0,0,0,.25); }
+.sec-dot { width:7px; height:7px; border-radius:50%; flex-shrink:0; margin-top:4px; }
+.d1{background:#c9a84c}.d2{background:#a8c9a0}.d3{background:#c9b0a0}.d4{background:#c9a0a0}
+.sec-t { font-size:13px; font-weight:500; color:var(--cream); }
+.sec-d { font-size:12px; color:var(--cream-body); margin-top:1px; }  /* FIX */
+
+/* ═══════════════════════════════════════
+   ██ PROJECTS
+═══════════════════════════════════════ */
+#projects { background:var(--red); padding:100px 0; }
+
+.proj-intro-band {
+  background:var(--cream); color:var(--ink);
+  padding:60px 3.5rem;
+  display:flex; align-items:center; gap:6rem;
+  border-top:1px solid var(--rule-red); border-bottom:1px solid var(--rule-red);
+  position:relative; overflow:hidden;
+}
+.pib-num {
+  font-family:'Playfair Display',serif;
+  font-size:clamp(80px,12vw,160px);
+  font-weight:900; font-style:italic;
+  color:transparent; -webkit-text-stroke:1px rgba(120,14,14,.1);
+  line-height:.8; flex-shrink:0;
+}
+.pib-title {
+  font-family:'Playfair Display',serif;
+  font-size:clamp(28px,4vw,46px); font-weight:700; line-height:.95;
+  color:var(--ink); margin-bottom:.75rem; letter-spacing:-.02em;
+}
+.pib-title em { font-style:italic; color:var(--red); }
+.pib-sub { font-family:'EB Garamond',serif; font-size:17px; color:var(--ink-2); line-height:1.8; }
+
+.proj-grid {
+  display:grid; grid-template-columns:1fr 1fr;
+  border-top:1px solid var(--rule-red); border-left:1px solid var(--rule-red);
+}
+.pcard {
+  background:var(--red-deep);
+  border-right:1px solid var(--rule-red); border-bottom:1px solid var(--rule-red);
+  position:relative; overflow:hidden; transition:background .25s;
+}
+.pcard:hover { background:var(--red); }
+.pcard.cream-card { background:var(--cream-2); color:var(--ink); }
+.pcard.cream-card:hover { background:var(--cream); }
+
+.pcard-head {
+  padding:1.75rem 2rem 1.5rem;
+  border-bottom:1px solid transparent;
+  display:flex; align-items:flex-start; justify-content:space-between;
+  cursor:pointer; user-select:none; gap:1rem;
+}
+.pcard.cream-card .pcard-head   { border-bottom-color:var(--rule-dark); }
+.pcard:not(.cream-card) .pcard-head { border-bottom-color:var(--rule-red); }
+.pcard-head-left { display:flex; align-items:flex-start; gap:12px; flex:1; }
+.pcard-idx {
+  font-family:'DM Mono',monospace; font-size:11px;
+  padding:3px 7px; margin-top:2px; flex-shrink:0; font-weight:500; letter-spacing:.1em;
+}
+.pcard:not(.cream-card) .pcard-idx { background:rgba(245,237,216,.1); color:var(--gold); }
+.pcard.cream-card .pcard-idx  { background:var(--red-deep); color:var(--cream-body); }
+.pcard-title { font-family:'Playfair Display',serif; font-size:18px; font-weight:700; line-height:1.2; margin-bottom:3px; }
+.pcard:not(.cream-card) .pcard-title { color:var(--cream); }
+.pcard.cream-card .pcard-title { color:var(--ink); }
+.pcard-sub { font-size:11px; letter-spacing:.08em; text-transform:uppercase; }
+.pcard:not(.cream-card) .pcard-sub { color:var(--cream-dim); }
+.pcard.cream-card .pcard-sub  { color:var(--ink-3); }
+.pcard-badge { font-size:10px; letter-spacing:.1em; text-transform:uppercase; padding:3px 9px; border:1px solid; flex-shrink:0; white-space:nowrap; margin-top:2px; }
+.badge-gold  { border-color:rgba(196,154,60,.5); color:var(--gold); }
+.badge-cream { border-color:rgba(245,237,216,.3); color:var(--cream-body); }
+.badge-red   { border-color:rgba(120,14,14,.4); color:var(--red); }
+
+.chevron { width:16px; height:16px; flex-shrink:0; transition:transform .3s; margin-top:3px; }
+.pcard:not(.cream-card) .chevron { color:var(--cream-dim); }
+.pcard.cream-card .chevron { color:var(--ink-3); }
+.pcard.open .chevron { transform:rotate(180deg); }
+
+.pcard-body { display:none; padding:0 2rem 2rem; animation:fadeSlide .3s ease; }
+.pcard.open .pcard-body { display:block; }
+@keyframes fadeSlide { from{opacity:0;transform:translateY(-8px)} to{opacity:1;transform:none} }
+
+.flow-strip {
+  padding:1rem 0 1.25rem; border-bottom:1px solid;
+  display:flex; flex-wrap:wrap; align-items:center; gap:5px; margin-bottom:1.5rem;
+}
+.pcard:not(.cream-card) .flow-strip { border-bottom-color:var(--rule-red); }
+.pcard.cream-card .flow-strip { border-bottom-color:var(--rule-dark); }
+.fn { font-family:'DM Mono',monospace; font-size:10.5px; padding:3px 9px; letter-spacing:.06em; }
+.pcard:not(.cream-card) .fn { background:rgba(0,0,0,.3); border:1px solid var(--rule-red); color:var(--cream-body); }
+.pcard.cream-card .fn { background:var(--cream-2); border:1px solid var(--rule-dark); color:var(--ink-2); }
+.fa { font-size:11px; }
+.pcard:not(.cream-card) .fa { color:var(--gold); }
+.pcard.cream-card .fa { color:var(--ink-3); }
+
+.pbg { display:grid; grid-template-columns:1fr 1fr 1fr; gap:1.25rem; margin-bottom:1.5rem; }
+.pb-s-lbl {
+  font-size:10px; letter-spacing:.14em; text-transform:uppercase;
+  margin-bottom:.5rem; display:flex; align-items:center; gap:7px;
+}
+.pb-s-lbl::after { content:''; flex:1; height:1px; }
+.pcard:not(.cream-card) .pb-s-lbl       { color:var(--gold); }
+.pcard:not(.cream-card) .pb-s-lbl::after{ background:rgba(196,154,60,.25); }
+.pcard.cream-card .pb-s-lbl       { color:var(--red); }
+.pcard.cream-card .pb-s-lbl::after{ background:rgba(120,14,14,.12); }
+
+/* FIX: raised paragraph + list sizes on project cards */
+.pb-s p  { font-size:14px; line-height:1.72; font-weight:300; }
+.pb-s ul { list-style:none; }
+.pb-s li { font-size:14px; line-height:1.55; padding:3px 0 3px 14px; position:relative; font-weight:300; }
+.pcard:not(.cream-card) .pb-s p  { color:var(--cream-body); }
+.pcard:not(.cream-card) .pb-s li { color:var(--cream-body); }
+.pcard:not(.cream-card) .pb-s li::before { content:'—'; position:absolute; left:0; color:var(--gold); font-size:10px; top:5px; }
+.pcard.cream-card .pb-s p  { color:var(--ink-2); }
+.pcard.cream-card .pb-s li { color:var(--ink-2); }
+.pcard.cream-card .pb-s li::before { content:'—'; position:absolute; left:0; color:var(--red); font-size:10px; top:5px; }
+
+.pdb { font-family:'DM Mono',monospace; font-size:11px; padding:12px 14px; line-height:1.8; margin-bottom:1.25rem; }
+.pcard:not(.cream-card) .pdb { background:rgba(0,0,0,.4); border-left:2px solid var(--gold); color:var(--cream-body); }
+.pcard.cream-card .pdb { background:rgba(120,14,14,.06); border-left:2px solid var(--red); color:var(--ink-2); }
+
+.impact-box { padding:1rem 1.25rem; }
+.pcard:not(.cream-card) .impact-box { background:rgba(0,0,0,.25); border-left:3px solid var(--gold); }
+.pcard.cream-card .impact-box { background:rgba(120,14,14,.05); border-left:3px solid var(--red); }
+.impact-lbl { font-size:10px; letter-spacing:.15em; text-transform:uppercase; margin-bottom:5px; }
+.pcard:not(.cream-card) .impact-lbl { color:var(--gold); }
+.pcard.cream-card .impact-lbl { color:var(--red); }
+.impact-box p { font-size:14px; line-height:1.72; font-weight:300; }
+.pcard:not(.cream-card) .impact-box p { color:var(--cream-body); }
+.pcard.cream-card .impact-box p { color:var(--ink-2); }
+.pcard.wide { grid-column:1/-1; }
+
+/* ═══════════════════════════════════════
+   ██ CERTIFICATES — cream-2 section
+═══════════════════════════════════════ */
+#certs { background:var(--cream-2); color:var(--ink); padding:100px 0; }
+.bleed-type.cert-bleed { font-size:clamp(100px,13vw,190px); bottom:-5%; left:-2%; font-style:italic; }
+
+.certs-layout {
+  display:grid; grid-template-columns:260px 1fr;
+  border-top:1px solid var(--rule-dark); border-bottom:1px solid var(--rule-dark);
+}
+.certs-sidebar {
+  padding:3rem 2.5rem 3rem 0;
+  border-right:1px solid var(--rule-dark);
+  display:flex; flex-direction:column; justify-content:space-between;
+}
+.certs-side-num {
+  font-family:'Playfair Display',serif;
+  font-size:clamp(70px,9vw,120px); font-weight:900; font-style:italic;
+  color:var(--red); opacity:.1; line-height:.8; margin-bottom:2rem;
+}
+.certs-side-title {
+  font-family:'Playfair Display',serif;
+  font-size:clamp(26px,3.5vw,42px); font-weight:700; line-height:.95;
+  color:var(--ink); letter-spacing:-.02em; margin-bottom:1rem;
+}
+.certs-side-title em { font-style:italic; color:var(--red); }
+.certs-side-sub {
+  font-family:'EB Garamond',serif;
+  font-size:16px; line-height:1.8; color:var(--ink-2);
+}
+
+.certs-cards { padding:0 0 0 2.5rem; display:flex; flex-direction:column; }
+
+/* ── CERTIFICATE CARD — fully clickable ── */
+.cert-card {
+  display:flex; align-items:stretch; gap:2rem;
+  padding:2.25rem 2rem;
+  border-bottom:1px solid var(--rule-dark);
   text-decoration:none;
+  cursor:pointer;
+  color:inherit;
+  position:relative;
+  transition:background .25s, transform .2s, box-shadow .25s;
+  /* FIX: ensure pointer events & clickable */
+  -webkit-user-select:none;
+}
+.cert-card:last-child { border-bottom:none; }
+.cert-card:hover {
+  background:var(--cream);
+  transform:translateX(4px);
+  box-shadow:-4px 0 0 0 var(--red);
+}
+/* gold hover line on left */
+.cert-card::before {
+  content:'';
+  position:absolute; left:0; top:0; bottom:0; width:3px;
+  background:var(--gold); transform:scaleY(0); transform-origin:bottom;
+  transition:transform .3s ease;
+}
+.cert-card:hover::before { transform:scaleY(1); }
+
+.cert-num-large {
+  font-family:'Playfair Display',serif;
+  font-size:64px; font-weight:900; font-style:italic;
+  color:var(--red); opacity:.14; line-height:.8;
+  flex-shrink:0; width:68px; text-align:center; align-self:flex-start;
+  transition:opacity .25s;
+}
+.cert-card:hover .cert-num-large { opacity:.22; }
+.cert-content { flex:1; }
+.cert-title {
+  font-family:'Playfair Display',serif;
+  font-size:21px; font-weight:700; color:var(--ink);
+  margin-bottom:.5rem; line-height:1.2;
+}
+.cert-org {
+  font-size: 15px;         /* FIX: raised */
+  color:var(--ink-2); line-height:1.72; font-weight:300; margin-bottom:1.25rem;
+}
+
+/* view button */
+.cert-btn {
+  display:inline-flex; align-items:center; gap:8px;
+  font-size:10.5px; letter-spacing:.16em; text-transform:uppercase;
+  color:var(--red); border:1px solid rgba(120,14,14,.3);
+  padding:8px 18px; transition:all .2s;
+  font-family:'DM Sans',sans-serif;
+}
+.cert-card:hover .cert-btn {
+  background:var(--red); color:var(--cream); border-color:var(--red);
+}
+.cert-btn svg { transition:transform .2s; }
+.cert-card:hover .cert-btn svg { transform:translateY(2px); }
+
+/* ═══════════════════════════════════════
+   ██ CONTACT
+═══════════════════════════════════════ */
+#contact { background:var(--red-deep); color:var(--cream); }
+.contact-grid { display:grid; grid-template-columns:1fr 1fr; min-height:70vh; }
+.contact-left {
+  padding:80px 60px 80px 3.5rem;
+  display:flex; flex-direction:column; justify-content:center;
+  border-right:1px solid var(--rule-red);
+  position:relative; overflow:hidden;
+}
+.bleed-type.ct-bleed { font-size:clamp(80px,12vw,170px); bottom:-4%; right:-3%; font-style:italic; }
+.contact-big {
+  font-family:'Playfair Display',serif;
+  font-size:clamp(40px,6vw,76px); font-weight:900; line-height:.9;
+  letter-spacing:-.03em; color:var(--cream); margin-bottom:1.5rem;
+}
+.contact-big em { font-style:italic; color:transparent; -webkit-text-stroke:1.5px var(--cream-3); }
+.contact-sub {
+  font-family:'EB Garamond',serif;
+  font-size: 18px;       /* FIX: raised */
+  color:var(--cream-body); /* FIX: solid */
+  line-height:1.82; max-width:380px; margin-bottom:2.5rem;
+}
+.open-tag {
+  display:inline-flex; align-items:center; gap:8px;
+  border:1px solid rgba(196,154,60,.45); padding:6px 14px;
+  font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--gold);
+}
+.open-dot { width:5px; height:5px; border-radius:50%; background:var(--gold); animation:pulse 2s infinite; }
+.contact-right {
+  background:var(--cream);
+  padding:80px 3.5rem 80px 60px;
+  display:flex; flex-direction:column; justify-content:center;
+}
+.cc {
+  border-bottom:1px solid var(--rule-dark);
+  text-decoration:none; display:block;
   transition:background .2s;
+  margin:0 -60px; padding:2rem 60px;
 }
-.contact-card:hover{background:rgba(255,255,255,.1)}
-.cc-label{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:.5rem}
-.cc-value{font-size:16px;font-weight:500;color:var(--white)}
-.cc-note{font-size:12px;color:rgba(255,255,255,.35);margin-top:3px}
-.open-tag{display:inline-flex;align-items:center;gap:7px;background:rgba(22,163,74,.2);border:1px solid rgba(22,163,74,.4);color:#4ade80;font-size:12px;font-weight:500;padding:6px 14px;border-radius:100px;margin-top:1.75rem}
-.ot-dot{width:7px;height:7px;background:#4ade80;border-radius:50%;animation:blip 2s infinite}
+.cc:first-child { border-top:none; }
+.cc:last-child  { border-bottom:none; }
+.cc:hover { background:var(--cream-2); }
+.cc-label { font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-3); margin-bottom:6px; }
+.cc-value { font-family:'Playfair Display',serif; font-size:clamp(18px,2.2vw,26px); font-weight:600; color:var(--ink); line-height:1.15; }
+.cc-note  { font-size:13px; color:var(--ink-3); margin-top:4px; font-weight:300; }
 
-/* ── FOOTER ── */
-footer{background:var(--ink);border-top:1px solid rgba(255,255,255,.07);padding:1.5rem 2.5rem;text-align:center}
-footer p{font-size:12px;color:rgba(255,255,255,.2)}
-
-/* ── ANIMATIONS ── */
-.reveal{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
-.reveal.on{opacity:1;transform:none}
-.reveal-d1{transition-delay:.07s}
-.reveal-d2{transition-delay:.14s}
-.reveal-d3{transition-delay:.21s}
-.reveal-d4{transition-delay:.28s}
-.reveal-d5{transition-delay:.35s}
-.reveal-d6{transition-delay:.42s}
-
-/* ── RESPONSIVE ── */
-@media(max-width:900px){
-  .hero-layout{grid-template-columns:1fr}
-  .hero-card{display:none}
-  .skills-masonry{columns:1}
-  .arch-grid{grid-template-columns:1fr 1fr}
-  .proj-grid{grid-template-columns:1fr}
-  .pbg{grid-template-columns:1fr}
-  .cert-grid{grid-template-columns:1fr}
-  .contact-row{grid-template-columns:1fr}
+/* ═══════════════════════════════════════
+   ██ FOOTER
+═══════════════════════════════════════ */
+footer {
+  background:var(--red-deep); border-top:1px solid var(--rule-red);
+  padding:1.5rem 3.5rem;
+  display:flex; align-items:center; justify-content:space-between;
 }
-@media(max-width:600px){
-  nav{padding:0 1.25rem}
-  .nav-links a:not(.nav-pill){display:none}
-  .wrap{padding:0 1.25rem}
-  section{padding:60px 0}
-  #hero{padding-top:100px}
-  .arch-grid{grid-template-columns:1fr}
+.footer-left  { font-family:'EB Garamond',serif; font-size:13px; letter-spacing:.2em; text-transform:uppercase; color:var(--cream-dim); }
+.footer-right { font-size:11px; color:rgba(245,237,216,.25); letter-spacing:.06em; }
+
+/* ═══════════════════════════════════════
+   SCROLL REVEAL
+═══════════════════════════════════════ */
+.rv   { opacity:0; transform:translateY(20px); transition:opacity .65s ease, transform .65s ease; }
+.rv.on{ opacity:1; transform:none; }
+.rv-l { opacity:0; transform:translateX(-20px); transition:opacity .65s ease, transform .65s ease; }
+.rv-l.on{ opacity:1; transform:none; }
+.d1{transition-delay:.07s}.d2{transition-delay:.14s}.d3{transition-delay:.21s}
+.d4{transition-delay:.28s}.d5{transition-delay:.35s}.d6{transition-delay:.42s}
+
+/* ═══════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════ */
+@media(max-width:1024px){
+  nav { padding:0 2rem; }
+  .inner { padding:0 2rem; }
+  #hero { grid-template-columns:1fr; }
+  .hero-left { padding:80px 2rem 60px; }
+  .hero-right { padding:50px 2rem; flex-direction:row; gap:2rem; flex-wrap:wrap; }
+  .hero-avatar-frame { width:150px; height:185px; }
+  .hero-strip { padding:1.1rem 2rem; flex-wrap:wrap; gap:1rem; }
+  .skills-masthead { grid-template-columns:1fr; }
+  .skills-masthead-left { border-right:none; padding-right:0; border-bottom:1px solid var(--rule-dark); padding-bottom:1.5rem; margin-bottom:1.5rem; }
+  .skills-masthead-right { padding-left:0; }
+  .skills-grid { grid-template-columns:1fr 1fr; }
+  .sk-card:nth-child(3n) { border-right:1px solid var(--rule-dark); }
+  .sk-card:nth-child(2n) { border-right:none; }
+  .arch-head { grid-template-columns:1fr; gap:2rem; }
+  .arch-grid { grid-template-columns:1fr 1fr; }
+  .proj-grid { grid-template-columns:1fr; }
+  .pcard.wide { grid-column:auto; }
+  .pbg { grid-template-columns:1fr; }
+  .certs-layout { grid-template-columns:1fr; }
+  .certs-sidebar { border-right:none; border-bottom:1px solid var(--rule-dark); padding:2.5rem 0; }
+  .certs-cards { padding-left:0; padding-top:2rem; }
+  .contact-grid { grid-template-columns:1fr; min-height:auto; }
+  .contact-left { border-right:none; border-bottom:1px solid var(--rule-red); padding:70px 2rem; }
+  .contact-right { padding:60px 2rem; }
+  .cc { margin:0 -2rem; padding:1.75rem 2rem; }
+  footer { padding:1.5rem 2rem; }
+  .proj-intro-band { padding:50px 2rem; gap:3rem; }
+}
+@media(max-width:640px){
+  .skills-grid { grid-template-columns:1fr; }
+  .sk-card { border-right:none !important; }
+  .arch-grid { grid-template-columns:1fr; }
+  .nav-menu a:not(.nav-cta):not(:last-child) { display:none; }
+  .pib-num { display:none; }
+  h1.hero-name { font-size:44px; }
+  .hero-right { flex-direction:column; }
+  .hero-avatar-frame { width:130px; height:160px; }
 }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
+<!-- ══ NAV ══ -->
 <nav>
-  <div class="nav-inner">
-    <a href="#hero" class="nav-logo">Ngoc<span>.erp</span></a>
-    <div class="nav-links">
-      <a href="#skills-ba">Skills</a>
-      <a href="#odoo-arch">Odoo</a>
-      <a href="#projects">Projects</a>
-      <a href="#certs">Certificates</a>
-      <a href="#contact" class="nav-pill">Contact</a>
-    </div>
+  <a class="nav-wordmark" href="#hero">NGOC <em>·</em> ERP</a>
+  <div class="nav-menu">
+    <a href="#skills">Skills</a>
+    <a href="#arch">Architecture</a>
+    <a href="#projects">Projects</a>
+    <a href="#certs">Certificates</a>
+    <a href="#contact" class="nav-cta">Contact</a>
   </div>
 </nav>
 
-<!-- ══════════════════════════════════════ HERO -->
-<section id="hero">
-  <div class="hero-bg-grid"></div>
-  <div class="wrap">
-    <div class="hero-layout">
-      <div>
-        <div class="hero-badge reveal">
-          <span class="badge-dot"></span>
-          Available for Internship · 2025
-        </div>
-        <h1 class="reveal reveal-d1">
-          Huynh Thi<br>Bich <span class="accent-word">Ngoc</span>
-        </h1>
-        <p class="hero-desc reveal reveal-d2">
-          I specialize in analyzing business processes and designing ERP solutions using Odoo — bridging the gap between what the business needs and what the system can deliver.
-        </p>
-        <div class="hero-actions reveal reveal-d3">
-          <a href="#projects" class="btn btn-dark">
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1" y="1" width="5" height="5" rx="1.5" stroke="currentColor" stroke-width="1.5"/><rect x="8" y="1" width="5" height="5" rx="1.5" stroke="currentColor" stroke-width="1.5"/><rect x="1" y="8" width="5" height="5" rx="1.5" stroke="currentColor" stroke-width="1.5"/><rect x="8" y="8" width="5" height="5" rx="1.5" stroke="currentColor" stroke-width="1.5"/></svg>
-            View Projects
-          </a>
-          <a href="#contact" class="btn btn-ghost">Contact Me →</a>
+<!-- ══════════════════════════════════════
+     HERO
+══════════════════════════════════════ -->
+<section id="hero" class="page-section">
+
+  <!-- LEFT — deep red, text content -->
+  <div class="hero-left">
+    <span class="bleed-type bleed-on-red h-bleed">ERP.</span>
+    <div class="hero-badge rv"><span class="hero-badge-dot"></span>Available for Internship · 2025</div>
+    <h1 class="hero-name rv d1">
+      Huynh Thi<br>
+      <span class="outline-line">Bich Ngoc</span>
+    </h1>
+    <div class="hero-role rv d2">Odoo ERP Business Analyst Intern</div>
+    <p class="hero-desc rv d3">I specialize in analyzing business processes and designing ERP solutions using Odoo — bridging the gap between what the business needs and what the system can deliver.</p>
+    <div class="hero-actions rv d4">
+      <a href="#projects" class="btn-cream">View Projects</a>
+      <a href="#contact" class="btn-outline-cream">Contact →</a>
+    </div>
+  </div>
+
+  <!-- RIGHT — cream panel: avatar + profile card -->
+  <div class="hero-right">
+    <span class="bleed-type bleed-on-cream hr-bleed">BA.</span>
+
+    <!-- AVATAR IMAGE — premium grayscale -->
+    <div class="hero-avatar-wrap rv d1">
+      <div class="hero-avatar-frame">
+        <img
+          src="avatar.jpg"
+          alt="Huynh Thi Bich Ngoc — ERP Business Analyst"
+          onerror="this.parentElement.style.background='var(--red-deep)'; this.style.display='none'; this.parentElement.insertAdjacentHTML('beforeend','<div style=\'width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-family:Playfair Display,serif;font-size:48px;font-weight:900;color:rgba(245,237,216,0.25);\'>HN</div>')"
+        />
+      </div>
+      <span class="hero-avatar-label">Huynh Thi Bich Ngoc</span>
+    </div>
+
+    <!-- Profile stat card -->
+    <div class="hero-card rv d2">
+      <div class="hc-top">
+        <div class="hc-ava-fallback">HN</div>
+        <div>
+          <div class="hc-n">Huynh Thi Bich Ngoc</div>
+          <div class="hc-r">ERP Business Analyst · Odoo</div>
         </div>
       </div>
-      <div class="hero-card reveal reveal-d4">
-        <div class="hc-top">
-          <div class="hc-ava">HN</div>
-          <div>
-            <div class="hc-name">Huynh Thi Bich Ngoc</div>
-            <div class="hc-role">Odoo ERP Business Analyst Intern</div>
-          </div>
-        </div>
-        <div class="hc-grid">
-          <div class="hc-stat">
-            <div class="hc-stat-label">Specialization</div>
-            <div class="hc-stat-val">ERP / Odoo</div>
-          </div>
-          <div class="hc-stat">
-            <div class="hc-stat-label">Projects Built</div>
-            <div class="hc-stat-val">5 Modules</div>
-          </div>
-          <div class="hc-stat">
-            <div class="hc-stat-label">Methodology</div>
-            <div class="hc-stat-val">Agile + Waterfall</div>
-          </div>
-          <div class="hc-stat">
-            <div class="hc-stat-label">Status</div>
-            <div class="hc-stat-val" style="color:var(--green)">Open ✓</div>
-          </div>
-        </div>
-        <div class="hc-chips">
-          <span class="chip chip-blue">BPMN</span>
-          <span class="chip chip-blue">Fit/Gap</span>
-          <span class="chip chip-blue">BRD</span>
-          <span class="chip chip-green">Odoo 16/17</span>
-          <span class="chip chip-green">PostgreSQL</span>
-          <span class="chip chip-amber">Python</span>
-        </div>
+      <div class="hc-stats">
+        <div class="hc-stat"><div class="hc-sl">Specialization</div><div class="hc-sv">ERP / Odoo</div></div>
+        <div class="hc-stat"><div class="hc-sl">Projects Built</div><div class="hc-sv">5 Modules</div></div>
+        <div class="hc-stat"><div class="hc-sl">Methodology</div><div class="hc-sv">Agile + Waterfall</div></div>
+        <div class="hc-stat"><div class="hc-sl">Status</div><div class="hc-sv open">Open ✓</div></div>
+      </div>
+      <div class="hc-chips">
+        <span class="hchip accent">BPMN</span>
+        <span class="hchip accent">Fit/Gap</span>
+        <span class="hchip accent">BRD</span>
+        <span class="hchip">Odoo 16/17</span>
+        <span class="hchip">PostgreSQL</span>
+        <span class="hchip">Python</span>
+        <span class="hchip">5W1H</span>
       </div>
     </div>
   </div>
+
+  <!-- bottom ticker strip -->
+  <div class="hero-strip">
+    <span class="hs-item">ERP Implementation</span>
+    <span class="hs-sep"></span>
+    <span class="hs-item">Odoo Functional</span>
+    <span class="hs-sep"></span>
+    <span class="hs-item">Business Analysis</span>
+    <span class="hs-sep"></span>
+    <span class="hs-item">Process Modeling</span>
+    <span class="hs-sep"></span>
+    <span class="hs-item">BPMN · UML · Fit/Gap</span>
+  </div>
 </section>
 
-<!-- ══════════════════════════════════════ BA SKILLS -->
-<section id="skills-ba">
-  <div class="wrap">
-    <div class="sec-eyebrow reveal"><span class="eyebrow-line"></span><span class="eyebrow-text">Business Analysis & PM Skills</span></div>
-    <h2 class="sec-title reveal">Structured thinking, systematic delivery</h2>
-    <p class="sec-sub reveal">A complete BA toolkit — from eliciting requirements to managing go-live — applied to real ERP implementations.</p>
-
-    <div class="skills-masonry">
-
-      <!-- Requirement Gathering -->
-      <div class="skill-card reveal">
-        <div class="skill-card-icon icon-blue">🔍</div>
-        <div class="skill-card-title">Requirement Gathering</div>
-        <p>Structured elicitation techniques to uncover true business needs beyond surface-level requests. The goal is not to document what users say — but to discover what they actually need.</p>
-        <div class="tag-row">
-          <span class="stag">5W1H + 2H</span>
-          <span class="stag">5 Whys</span>
-          <span class="stag">Root Cause Analysis</span>
-          <span class="stag">Stakeholder Interview</span>
-        </div>
-        <p style="margin-top:.75rem;font-style:italic;color:var(--ink3);font-size:12px">Framework: Who / What / Where / When / Why / How / How many / How much</p>
+<!-- ══════════════════════════════════════
+     BA SKILLS
+══════════════════════════════════════ -->
+<section id="skills" class="page-section cream-section">
+  <span class="bleed-type bleed-on-cream sk-bleed">SKILLS.</span>
+  <div class="inner">
+    <div class="skills-masthead rv">
+      <div class="skills-masthead-left">
+        <div class="skills-sec-num">01</div>
+        <div class="eyebrow eyebrow-ink" style="margin-bottom:.75rem">BA &amp; PM Skills</div>
+        <span class="rule-gold" style="margin-top:.5rem"></span>
       </div>
+      <div class="skills-masthead-right">
+        <div class="skills-big-title">Business Analysis<br><em>&amp; Project Thinking</em></div>
+        <p class="skills-intro">A complete BA toolkit applied to real ERP implementations — from requirement elicitation using structured frameworks to go-live strategy selection, process modeling, and fit/gap resolution.</p>
+      </div>
+    </div>
 
-      <!-- BRD / Vision & Scope -->
-      <div class="skill-card reveal reveal-d1">
-        <div class="skill-card-icon icon-green">📄</div>
-        <div class="skill-card-title">BRD · Vision & Scope Document</div>
-        <p>Business Requirements Document (BRD) captures the full specification: objectives, stakeholders, functional and non-functional requirements, and acceptance criteria. Vision & Scope aligns all parties before implementation begins.</p>
-        <div class="tag-row">
-          <span class="stag">BRD Template</span>
-          <span class="stag">Use Case Specification</span>
-          <span class="stag">Acceptance Criteria</span>
-          <span class="stag">Traceability Matrix</span>
+    <div class="skills-grid">
+      <div class="sk-card rv">
+        <span class="sk-num">01 — Requirement Gathering</span>
+        <div class="sk-title">Eliciting True Business Needs</div>
+        <p class="sk-body">Structured elicitation using the <strong>5W1H + 2H model</strong> (What, Why, Who, When, Where, How, How much, How many). Special focus on <em>Why</em> combined with <strong>5 Whys</strong> root-cause analysis to uncover pain points behind requests. Output: Vision &amp; Scope + BRD.</p>
+        <div class="sk-tags">
+          <span class="sk-tag">5W1H + 2H</span><span class="sk-tag">5 Whys</span>
+          <span class="sk-tag">Root Cause</span><span class="sk-tag">BRD</span><span class="sk-tag">Vision &amp; Scope</span>
         </div>
       </div>
 
-      <!-- UML & BPMN -->
-      <div class="skill-card reveal reveal-d2">
-        <div class="skill-card-icon icon-amber">📐</div>
-        <div class="skill-card-title">UML & BPMN Modeling</div>
-        <p>Visual process communication is the core language of BA. I use BPMN to model AS-IS (current) and TO-BE (future) workflows, and UML diagrams to communicate system behavior to developers.</p>
-        <div class="tag-row">
-          <span class="stag">BPMN 2.0</span>
-          <span class="stag">Activity Diagram</span>
-          <span class="stag">State Machine</span>
-          <span class="stag">Sequence Diagram</span>
-          <span class="stag">Use Case Diagram</span>
-        </div>
-        <p style="margin-top:.75rem;font-size:12.5px;color:var(--ink2)"><strong style="font-weight:600">AS-IS:</strong> Document the current process with all pain points.<br><strong style="font-weight:600">TO-BE:</strong> Redesign the optimized target state.</p>
-      </div>
-
-      <!-- Fit/Gap -->
-      <div class="skill-card reveal reveal-d3">
-        <div class="skill-card-icon icon-rose">🎯</div>
-        <div class="skill-card-title">Fit/Gap Analysis</div>
-        <p>Systematic comparison between business requirements and ERP standard capabilities. The analysis determines whether a gap should be bridged through configuration, workaround, or custom development — following strict priority order:</p>
-        <div class="fitgap">
-          <div class="fg-step g">
-            <span class="fg-num">01</span>
-            <div><div class="fg-title">Standard Feature</div><div class="fg-desc">Does Odoo already solve this out-of-the-box?</div></div>
-          </div>
-          <div class="fg-step b">
-            <span class="fg-num">02</span>
-            <div><div class="fg-title">Configuration</div><div class="fg-desc">Settings, security rules, automated actions</div></div>
-          </div>
-          <div class="fg-step a">
-            <span class="fg-num">03</span>
-            <div><div class="fg-title">Process Workaround</div><div class="fg-desc">Adapt the business process to fit the system</div></div>
-          </div>
-          <div class="fg-step r">
-            <span class="fg-num">04</span>
-            <div><div class="fg-title">Custom Development</div><div class="fg-desc">Only when 01–03 cannot meet the requirement</div></div>
-          </div>
+      <div class="sk-card rv d1">
+        <span class="sk-num">02 — Process Modeling</span>
+        <div class="sk-title">UML &amp; BPMN Notation</div>
+        <p class="sk-body"><strong>BPMN 2.0</strong> for AS-IS (current state) and TO-BE (future state) process flows. <strong>Class Diagram</strong> for MVC database design. <strong>Flowchart</strong> for algorithm logic. <strong>State Machine Diagram</strong> for object lifecycle (Initial State → Transition → Event).</p>
+        <div class="sk-tags">
+          <span class="sk-tag">BPMN 2.0</span><span class="sk-tag">AS-IS / TO-BE</span>
+          <span class="sk-tag">State Machine</span><span class="sk-tag">Class Diagram</span><span class="sk-tag">Flowchart</span>
         </div>
       </div>
 
-      <!-- ERP Lifecycle -->
-      <div class="skill-card reveal">
-        <div class="skill-card-icon icon-blue">🔄</div>
-        <div class="skill-card-title">ERP Implementation Lifecycle</div>
-        <p>End-to-end knowledge of how ERP projects are structured, from initial scoping to post-go-live support. Each phase has distinct BA deliverables and stakeholder engagement needs.</p>
+      <div class="sk-card rv d2">
+        <span class="sk-num">03 — Gap Analysis</span>
+        <div class="sk-title">Fit / Gap Analysis</div>
+        <p class="sk-body">Systematic assessment between business requirements and Odoo capabilities. Strict 4-level resolution — exhaust lower levels before escalating to custom development:</p>
+        <div class="fg-steps">
+          <div class="fg-step g"><span class="fg-step-n">01</span><div><div class="fg-step-t">Standard Feature</div><div class="fg-step-d">Out-of-the-box · cost = 0</div></div></div>
+          <div class="fg-step b"><span class="fg-step-n">02</span><div><div class="fg-step-t">Configuration</div><div class="fg-step-d">Settings, rules, automation</div></div></div>
+          <div class="fg-step a"><span class="fg-step-n">03</span><div><div class="fg-step-t">Process Workaround</div><div class="fg-step-d">Adapt personnel workflow to system</div></div></div>
+          <div class="fg-step r"><span class="fg-step-n">04</span><div><div class="fg-step-t">Customization</div><div class="fg-step-d">New code — high risk, last resort</div></div></div>
+        </div>
+      </div>
+
+      <div class="sk-card rv d3">
+        <span class="sk-num">04 — ERP Methodology</span>
+        <div class="sk-title">ERP Implementation Lifecycle</div>
+        <p class="sk-body">End-to-end knowledge of how ERP projects are structured. Each phase has distinct BA deliverables and stakeholder engagement requirements:</p>
         <div class="phase-list">
-          <div class="phase-item"><span class="phase-num">1</span><div><span class="phase-name">Initiation</span> <span class="phase-sub">— Scope, stakeholders, project charter</span></div></div>
-          <div class="phase-item"><span class="phase-num">2</span><div><span class="phase-name">Analysis</span> <span class="phase-sub">— Requirements gathering, AS-IS process, BRD</span></div></div>
-          <div class="phase-item"><span class="phase-num">3</span><div><span class="phase-name">Design</span> <span class="phase-sub">— TO-BE model, Fit/Gap, system design</span></div></div>
-          <div class="phase-item"><span class="phase-num">4</span><div><span class="phase-name">Implementation</span> <span class="phase-sub">— Configuration, customization, UAT</span></div></div>
-          <div class="phase-item"><span class="phase-num">5</span><div><span class="phase-name">Go-Live & Support</span> <span class="phase-sub">— Cutover, training, hypercare</span></div></div>
+          <div class="phase-row"><span class="phase-n">1</span><span class="phase-name">Initiation / Kick-off</span><span class="phase-sub">— Scope, charter, stakeholders</span></div>
+          <div class="phase-row"><span class="phase-n">2</span><span class="phase-name">Analysis &amp; Design</span><span class="phase-sub">— Requirements, AS-IS, BRD</span></div>
+          <div class="phase-row"><span class="phase-n">3</span><span class="phase-name">Build &amp; Configure</span><span class="phase-sub">— Configuration, customization</span></div>
+          <div class="phase-row"><span class="phase-n">4</span><span class="phase-name">UAT &amp; Training</span><span class="phase-sub">— Test, validate, train users</span></div>
+          <div class="phase-row"><span class="phase-n">5</span><span class="phase-name">Go-Live &amp; Support</span><span class="phase-sub">— Cutover, hypercare</span></div>
         </div>
       </div>
 
-      <!-- Agile vs Waterfall + Go-live -->
-      <div class="skill-card reveal reveal-d1">
-        <div class="skill-card-icon icon-green">⚙️</div>
-        <div class="skill-card-title">Agile vs Waterfall · Go-Live Strategies</div>
-        <p><strong style="font-weight:600">Waterfall</strong> is preferred for ERP implementations with clear, stable requirements and hard go-live dates. <strong style="font-weight:600">Agile/Scrum</strong> works well for module-by-module rollouts where requirements evolve.</p>
-        <p style="margin-top:.625rem">Go-live strategy selection depends on risk tolerance, data complexity, and business continuity requirements:</p>
-        <div class="tag-row" style="margin-top:.625rem">
-          <span class="stag">Big Bang</span>
-          <span class="stag">Phased Rollout</span>
-          <span class="stag">Parallel Run</span>
-        </div>
-        <p style="margin-top:.75rem;font-size:12px;color:var(--ink3)">
-          <strong style="font-weight:500;color:var(--ink2)">Big Bang</strong> — All modules live simultaneously · High risk, fastest ROI<br>
-          <strong style="font-weight:500;color:var(--ink2)">Phased</strong> — Module-by-module · Balanced risk, incremental adoption<br>
-          <strong style="font-weight:500;color:var(--ink2)">Parallel</strong> — Old + new systems run together · Lowest risk, highest cost
-        </p>
+      <div class="sk-card rv d4">
+        <span class="sk-num">05 — Methodology</span>
+        <div class="sk-title">Agile vs. Waterfall</div>
+        <p class="sk-body"><strong>Waterfall</strong> — sequential, preferred for ERP with stable requirements and hard deadlines. Clear phases with defined sign-offs and deliverable gates.<br><br><strong>Agile / Scrum</strong> — sprint-based iterations for module rollouts where requirements evolve. Faster feedback cycles, early delivery of working increments.<br><br>Odoo principle: <em>"Standard First"</em> — always configure before customizing.</p>
       </div>
 
+      <div class="sk-card rv d5">
+        <span class="sk-num">06 — Deployment</span>
+        <div class="sk-title">Go-Live Strategies</div>
+        <p class="sk-body">Selection depends on risk tolerance, data complexity, and business continuity. Three proven strategies:</p>
+        <div class="fg-steps" style="margin-top:.875rem">
+          <div class="fg-step r"><span class="fg-step-n" style="color:#c9a0a0">BB</span><div><div class="fg-step-t">Big Bang</div><div class="fg-step-d">All modules live simultaneously · Highest risk, fastest ROI</div></div></div>
+          <div class="fg-step a"><span class="fg-step-n" style="color:var(--gold)">PH</span><div><div class="fg-step-t">Phased Rollout</div><div class="fg-step-d">Module-by-module · Balanced risk, incremental adoption</div></div></div>
+          <div class="fg-step g"><span class="fg-step-n">PA</span><div><div class="fg-step-t">Parallel Run</div><div class="fg-step-d">Old + new systems together · Safest, highest staff load</div></div></div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ══════════════════════════════════════ ODOO ARCHITECTURE -->
-<section id="odoo-arch">
-  <div class="wrap">
-    <div class="sec-eyebrow reveal"><span class="eyebrow-line"></span><span class="eyebrow-text">Odoo Architecture & System Knowledge</span></div>
-    <h2 class="sec-title reveal">Technical depth behind functional work</h2>
-    <p class="sec-sub reveal">Understanding how Odoo works under the hood — from data layer to frontend — enables me to write precise specifications and communicate fluently with developers.</p>
+<!-- ══════════════════════════════════════
+     ODOO ARCHITECTURE
+══════════════════════════════════════ -->
+<section id="arch" class="page-section red-deep-section">
+  <span class="bleed-type bleed-on-red ar-bleed">ODOO.</span>
+  <div class="inner">
+    <div class="arch-head rv">
+      <div>
+        <div class="eyebrow eyebrow-gold" style="margin-bottom:1rem">02 — Technical Knowledge</div>
+        <div class="arch-head-title">Odoo Architecture<br><em>&amp; Security</em></div>
+      </div>
+      <p class="arch-head-body">Understanding how Odoo works under the hood — from data layer to frontend — enables precise functional specifications and fluent collaboration with developers. No ambiguity in handoff documents.</p>
+    </div>
 
     <div class="arch-grid">
-
-      <div class="arch-card reveal">
-        <div class="arch-icon">🗄️</div>
-        <div class="arch-title">3-Tier Architecture</div>
-        <p>Odoo follows a strict three-tier model that separates data persistence, business logic, and presentation — enabling scalability and clean module boundaries.</p>
-        <div class="mono-block">
-Layer 1: PostgreSQL<br>
+      <div class="arch-card rv">
+        <span class="arch-card-n">01 / 06</span>
+        <div class="arch-card-title">3-Tier Architecture</div>
+        <p class="arch-card-body">Strict three-layer architecture separating data, logic, and presentation. PostgreSQL is the only supported database layer.</p>
+        <div class="code-blk">Layer 1: <span class="c-model">PostgreSQL</span><br>
   → Relational data, ORM tables<br>
-<br>
-Layer 2: Python (ORM + Logic)<br>
-  → Models, methods, wizards<br>
-<br>
-Layer 3: OWL / XML Views<br>
-  → Forms, lists, kanban, QWeb
+  → Only supported RDBMS<br><br>
+Layer 2: <span class="c-model">Python (ORM + Logic)</span><br>
+  → Models, methods, wizards<br><br>
+Layer 3: <span class="c-model">OWL / XML / JSON-RPC</span><br>
+  → Forms, lists, kanban, QWeb<br>
+  → Browser via JSON-RPC</div>
+      </div>
+
+      <div class="arch-card rv d1">
+        <span class="arch-card-n">02 / 06</span>
+        <div class="arch-card-title">MVC Design Pattern</div>
+        <p class="arch-card-body">Odoo maps cleanly to Model-View-Controller — the foundation for writing technical specs developers implement directly without re-interpretation.</p>
+        <div class="code-blk"><span class="c-com"># Model: Python class</span><br>
+class SaleOrder(models.Model):<br>
+  _name = <span class="c-field">'sale.order'</span><br>
+  name = fields.Char()<br><br>
+<span class="c-com"># View: XML template</span><br>
+&lt;form string=<span class="c-field">"Sale Order"</span>&gt;<br>
+  &lt;field name=<span class="c-field">"name"</span>/&gt;<br>&lt;/form&gt;<br><br>
+<span class="c-com"># Controller: HTTP routes</span><br>
+@http.route(<span class="c-field">'/api/orders'</span>)</div>
+      </div>
+
+      <div class="arch-card rv d2">
+        <span class="arch-card-n">03 / 06</span>
+        <div class="arch-card-title">Delegation Inheritance (_inherits)</div>
+        <p class="arch-card-body">Creates a parent-child table relationship — the child model embeds the parent, reusing data synchronously without database redundancy. Used in Education CRM: Student → res.partner.</p>
+        <div class="code-blk"><span class="c-com"># _inherits = table delegation</span><br>
+<span class="c-model">education.student</span>:<br>
+  _inherits = {<br>
+    <span class="c-field">'res.partner'</span>: <span class="c-field">'partner_id'</span><br>
+  }<br>
+<span class="c-com"># Inherits: name, phone, email</span><br>
+<span class="c-com"># FK only — no duplication</span><br>
+<span class="c-com"># Example: res.users → res.partner</span></div>
+      </div>
+
+      <div class="arch-card rv d3">
+        <span class="arch-card-n">04 / 06</span>
+        <div class="arch-card-title">Security — 4 Layers</div>
+        <p class="arch-card-body">Hierarchical security. A user must pass all four layers to access or modify a record. Critical for multi-department access control design.</p>
+        <div class="sec-rows">
+          <div class="sec-row"><div class="sec-dot d1"></div><div><div class="sec-t">CRUD Rights (ACL)</div><div class="sec-d">Create / Read / Write / Delete per model per group</div></div></div>
+          <div class="sec-row"><div class="sec-dot d2"></div><div><div class="sec-t">Record Rules (Domain Filter)</div><div class="sec-d">Row-level — user sees only their department data</div></div></div>
+          <div class="sec-row"><div class="sec-dot d3"></div><div><div class="sec-t">Menu Visibility</div><div class="sec-d">Groups control which menus appear in UI</div></div></div>
+          <div class="sec-row"><div class="sec-dot d4"></div><div><div class="sec-t">View / Field Access</div><div class="sec-d">Field-level: invisible, readonly, required by group</div></div></div>
         </div>
       </div>
 
-      <div class="arch-card reveal reveal-d1">
-        <div class="arch-icon">🏗️</div>
-        <div class="arch-title">MVC Design Pattern</div>
-        <p>Odoo's architecture maps cleanly to Model-View-Controller. Understanding this pattern is essential for writing accurate functional specifications that developers can implement directly.</p>
-        <div class="mono-block">
-Model  → Python classes (models.Model)<br>
-        ORM fields, business methods<br>
-<br>
-View   → XML templates (forms, lists)<br>
-        QWeb reports, OWL components<br>
-<br>
-Controller → HTTP routes, JSON-RPC<br>
-        Request/response handling
-        </div>
+      <div class="arch-card rv d4">
+        <span class="arch-card-n">05 / 06</span>
+        <div class="arch-card-title">PostgreSQL &amp; ORM Fields</div>
+        <p class="arch-card-body">Understanding ORM-to-SQL mapping is essential for performance analysis, complex reporting, and writing correct domain filters in technical specs.</p>
+        <div class="code-blk"><span class="c-com">-- ORM field → SQL column</span><br>
+fields.<span class="c-type">Char</span>      → VARCHAR<br>
+fields.<span class="c-type">Integer</span>   → INTEGER<br>
+fields.<span class="c-type">Many2one</span>  → INTEGER (FK)<br>
+fields.<span class="c-type">One2many</span>  → virtual inverse FK<br>
+fields.<span class="c-type">Many2many</span> → relation table<br><br>
+<span class="c-com">-- Reporting SQL example</span><br>
+SELECT <span class="c-field">partner_id</span>, SUM(amount_total)<br>
+FROM sale_order<br>
+GROUP BY <span class="c-field">partner_id</span></div>
       </div>
 
-      <div class="arch-card reveal reveal-d2">
-        <div class="arch-icon">🔗</div>
-        <div class="arch-title">Delegation Inheritance (_inherits)</div>
-        <p>Odoo supports three inheritance modes. Delegation inheritance (<code style="font-family:'DM Mono',monospace;font-size:11px;background:var(--bg3);padding:1px 5px;border-radius:4px">_inherits</code>) creates a parent-child table relationship — the child record delegates field access to the parent via a foreign key. Used in Education CRM for Student → res.partner relationship.</p>
-        <div class="mono-block">
-<span class="db-comment"># _inherit: extend same model</span><br>
-<span class="db-comment"># _inherits: table delegation</span><br>
-<br>
-_inherits = {<br>
-  <span class="db-field">'res.partner'</span>: <span class="db-field">'partner_id'</span><br>
-}<br>
-<span class="db-comment"># student.record → partner fields</span><br>
-<span class="db-comment"># via FK, no data duplication</span>
-        </div>
+      <div class="arch-card rv d5">
+        <span class="arch-card-n">06 / 06</span>
+        <div class="arch-card-title">Computed Fields &amp; Automation</div>
+        <p class="arch-card-body">Business logic lives in computed fields and automated actions. Precise specification of these mechanisms eliminates developer ambiguity and prevents re-work cycles.</p>
+        <div class="code-blk"><span class="c-com"># Computed: remaining qty</span><br>
+remaining_qty = fields.<span class="c-type">Float</span>(<br>
+  compute=<span class="c-field">'_compute_remaining'</span>,<br>
+  store=<span class="c-type">True</span>  <span class="c-com"># persisted in DB</span><br>
+)<br><br>
+<span class="c-com"># Automated action triggers</span><br>
+on state change → send email<br>
+on scheduled date → create task<br>
+cron job → batch process 23:00</div>
       </div>
-
-      <div class="arch-card reveal reveal-d3">
-        <div class="arch-icon">🔒</div>
-        <div class="arch-title">Security — 4 Layers</div>
-        <p>Odoo's security model is hierarchical. A user must pass all four layers to access or modify a record. Understanding this is critical for designing access control in multi-department ERP deployments.</p>
-        <div class="sec-layers">
-          <div class="sec-layer"><div class="sec-layer-dot d-blue"></div><div><div class="sec-layer-title">CRUD Rights (Access Control List)</div><div class="sec-layer-desc">Create / Read / Write / Delete per model per group</div></div></div>
-          <div class="sec-layer"><div class="sec-layer-dot d-green"></div><div><div class="sec-layer-title">Record Rules (Domain Filter)</div><div class="sec-layer-desc">Row-level restriction — "only own department records"</div></div></div>
-          <div class="sec-layer"><div class="sec-layer-dot d-amber"></div><div><div class="sec-layer-title">Menu Visibility</div><div class="sec-layer-desc">Groups control which menu items are visible</div></div></div>
-          <div class="sec-layer"><div class="sec-layer-dot d-rose"></div><div><div class="sec-layer-title">View / Field Access</div><div class="sec-layer-desc">Field-level invisibility, readonly, required by group</div></div></div>
-        </div>
-      </div>
-
-      <div class="arch-card reveal reveal-d4">
-        <div class="arch-icon">🐘</div>
-        <div class="arch-title">PostgreSQL & ORM</div>
-        <p>Odoo's ORM abstracts SQL but understanding the underlying PostgreSQL schema is essential for performance analysis, complex reporting, and writing correct domain filters.</p>
-        <div class="mono-block">
-<span class="db-comment">-- ORM field → column mapping</span><br>
-fields.Char  → VARCHAR<br>
-fields.Many2one → INTEGER (FK)<br>
-fields.One2many → virtual (inverse)<br>
-fields.Many2many → rel table<br>
-<br>
-<span class="db-comment">-- SQL query for reporting</span><br>
-SELECT partner_id, SUM(amount_total)<br>
-FROM sale_order GROUP BY partner_id
-        </div>
-      </div>
-
-      <div class="arch-card reveal reveal-d5">
-        <div class="arch-icon">⚡</div>
-        <div class="arch-title">Computed Fields & Automated Actions</div>
-        <p>Business logic in Odoo lives in computed fields and automated actions. Understanding these mechanisms lets me specify exact behavior without ambiguity for developers.</p>
-        <div class="mono-block">
-<span class="db-comment"># Computed field example</span><br>
-remaining_qty = fields.Float(<br>
-  compute=<span class="db-field">'_compute_remaining'</span>,<br>
-  store=<span class="db-type">True</span><br>
-)<br>
-<br>
-<span class="db-comment"># Triggered automated action</span><br>
-On state change → send email<br>
-On date → create reminder<br>
-Scheduled cron → batch process
-        </div>
-      </div>
-
     </div>
   </div>
 </section>
 
-<!-- ══════════════════════════════════════ PROJECTS -->
-<section id="projects">
-  <div class="wrap">
-    <div class="sec-eyebrow reveal"><span class="eyebrow-line"></span><span class="eyebrow-text">Projects</span></div>
-    <h2 class="sec-title reveal">Five ERP modules, end-to-end</h2>
-    <p class="sec-sub reveal">Each project represents a full BA cycle: problem discovery → process modeling → system design → business impact. Click any card to expand the full analysis.</p>
+<!-- ══════════════════════════════════════
+     PROJECTS
+══════════════════════════════════════ -->
+<section id="projects" class="page-section">
 
-    <div class="proj-grid">
+  <div class="proj-intro-band">
+    <div class="pib-num">05</div>
+    <div>
+      <div class="eyebrow eyebrow-ink" style="margin-bottom:.875rem">03 — Projects</div>
+      <div class="pib-title">Real-world ERP<br><em>Implementations</em></div>
+      <p class="pib-sub">Five modules, end-to-end analysis — problem discovery, database design, algorithm logic, and measurable business impact. Click any card to expand.</p>
+    </div>
+  </div>
 
-      <!-- ── PROJECT 1 ── -->
-      <div class="proj-card reveal" onclick="toggleProj(this)">
-        <div class="proj-header">
-          <div class="proj-header-left">
-            <span class="proj-idx">01</span>
-            <div>
-              <div class="proj-title">Procurement & Dynamic Approval</div>
-              <div class="proj-subtitle">Purchase · Inventory · QC</div>
-            </div>
+  <div class="proj-grid">
+
+    <!-- ── PROJECT 1 — red ── -->
+    <div class="pcard" onclick="tp(this)">
+      <div class="pcard-head">
+        <div class="pcard-head-left">
+          <span class="pcard-idx">01</span>
+          <div>
+            <div class="pcard-title">Procurement &amp; Dynamic Approval</div>
+            <div class="pcard-sub">Purchase · Inventory · QC</div>
           </div>
-          <span class="proj-badge pb-blue">Purchase</span>
-          <svg class="chevron" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 6.5l5 5 5-5"/></svg>
         </div>
-        <div class="proj-body">
-          <div class="flow-row">
-            <span class="flow-node">Purchase Request</span><span class="flow-arr">→</span>
-            <span class="flow-node">Approval Engine</span><span class="flow-arr">→</span>
-            <span class="flow-node">Purchase Order</span><span class="flow-arr">→</span>
-            <span class="flow-node">Receipt + QC</span><span class="flow-arr">→</span>
-            <span class="flow-node">Inventory Update</span>
+        <span class="pcard-badge badge-gold">Purchase</span>
+        <svg class="chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 5.5l5 5 5-5"/></svg>
+      </div>
+      <div class="pcard-body">
+        <div class="flow-strip">
+          <span class="fn">Purchase Request</span><span class="fa">→</span>
+          <span class="fn">Approval Engine</span><span class="fa">→</span>
+          <span class="fn">Purchase Order</span><span class="fa">→</span>
+          <span class="fn">QC Check</span><span class="fa">→</span>
+          <span class="fn">Stock + Cost Update</span>
+        </div>
+        <div class="pbg">
+          <div class="pb-s">
+            <div class="pb-s-lbl">Problem</div>
+            <p>A bookstore using centralized purchasing had rigid approval workflows with no quality inspection on goods receipt. POs were created without budget validation — causing unauthorized spending, duplicate orders, and inventory discrepancies with no audit trail.</p>
           </div>
-
-          <div class="pbg">
-            <div class="pb-section">
-              <div class="pb-section-title">Problem</div>
-              <p>Procurement approvals were manual and inconsistent across departments. Purchase Orders were created without budget validation or manager sign-off — resulting in unauthorized spending, duplicate orders, and inventory discrepancies. No audit trail existed.</p>
-            </div>
-            <div class="pb-section">
-              <div class="pb-section-title">Solution</div>
-              <p>Designed a dynamic multi-level approval matrix within Odoo Purchase. Approval routing adapts automatically based on purchase amount threshold and department. QC integration validates items before inventory update triggers.</p>
-            </div>
-            <div class="pb-section">
-              <div class="pb-section-title">Key Features</div>
-              <ul>
-                <li>PR → PO flow with state tracking</li>
-                <li>Amount-based routing (L1/L2/L3 approval)</li>
-                <li>Department-specific approval matrix</li>
-                <li>QC pass/fail before stock update</li>
-                <li>Rejection with mandatory comment</li>
-                <li>Landed cost auto-allocation on receipt</li>
-              </ul>
-            </div>
+          <div class="pb-s">
+            <div class="pb-s-lbl">Solution</div>
+            <p>Designed a dynamic multi-level approval matrix in Odoo Purchase. Approval routing adapts automatically based on total_amount threshold. approval.config table allows defining approval levels by value. QC step with security tag verification before stock confirmation.</p>
           </div>
-
-          <div class="pb-section-title" style="margin-bottom:.625rem">Database Design</div>
-          <div class="db-block">
-<span class="db-model">purchase.request</span>
-  id, name, <span class="db-field">department_id</span> → hr.department
-  <span class="db-field">approver_ids</span> → res.users (M2M)
-  state: draft|submitted|l1_approved|l2_approved|done|rejected
-  <span class="db-field">total_amount</span>: Monetary <span class="db-comment">← triggers level routing</span>
-
-<span class="db-model">purchase.request.line</span>
-  <span class="db-field">request_id</span> → purchase.request (M2O)
-  <span class="db-field">product_id</span> → product.product
-  qty_requested, qty_received
-  <span class="db-field">qc_status</span>: pending|pass|fail
+          <div class="pb-s">
+            <div class="pb-s-lbl">Key Features</div>
+            <ul>
+              <li>PR → PO with full state tracking</li>
+              <li>approval.config: amount-based level routing</li>
+              <li>L1: &lt;10M VND → done; ≥10M → L2 director</li>
+              <li>QC: security tag + exterior inspection step</li>
+              <li>Auto inventory + unit cost update from PO</li>
+              <li>Rejection with mandatory comment trail</li>
+            </ul>
           </div>
+        </div>
+        <div class="pb-s-lbl" style="margin-bottom:.75rem;color:var(--gold)">Database Design</div>
+        <div class="pdb"><span class="c-model">purchase.request</span>
+  date_required, <span class="c-field">total_amount</span>: Monetary <span class="c-com">← triggers level</span>
+  state: draft|submitted|approve1|approve2|done|rejected
+  <span class="c-field">approval_config_id</span> → approval.config
 
-          <div class="impact-strip">
-            <div class="impact-label">Business Impact</div>
-            <p>Eliminated unauthorized procurement by enforcing approval gates before any budget commitment. Full audit trail from PR creation through receipt. QC gate prevents defective goods from entering inventory — reducing write-offs. The entire PR-to-receipt flow is traceable in a single Odoo chain with zero manual handoffs.</p>
-          </div>
+<span class="c-model">purchase.request.line</span>
+  <span class="c-field">request_id</span> → purchase.request (One2many)
+  <span class="c-field">product_id</span>, quantity, estimated_cost
+  <span class="c-field">qc_status</span>: pending | pass | fail</div>
+        <div class="impact-box">
+          <div class="impact-lbl">Business Impact</div>
+          <p>Eliminated unauthorized procurement by enforcing approval gates before any budget commitment. Full audit trail from PR creation through QC and receipt. QC gate prevents defective goods from entering inventory. The entire PR-to-receipt flow is traceable in one Odoo chain with zero manual handoffs.</p>
         </div>
       </div>
+    </div>
 
-      <!-- ── PROJECT 2 ── -->
-      <div class="proj-card reveal reveal-d1" onclick="toggleProj(this)">
-        <div class="proj-header">
-          <div class="proj-header-left">
-            <span class="proj-idx">02</span>
-            <div>
-              <div class="proj-title">B2B Master Contract Management</div>
-              <div class="proj-subtitle">Sales · Invoicing · Delivery</div>
-            </div>
+    <!-- ── PROJECT 2 — cream ── -->
+    <div class="pcard cream-card" onclick="tp(this)">
+      <div class="pcard-head">
+        <div class="pcard-head-left">
+          <span class="pcard-idx">02</span>
+          <div>
+            <div class="pcard-title">B2B Master Contract Management</div>
+            <div class="pcard-sub">Sales · Partial Delivery · Invoicing</div>
           </div>
-          <span class="proj-badge pb-amber">B2B Sales</span>
-          <svg class="chevron" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 6.5l5 5 5-5"/></svg>
         </div>
-        <div class="proj-body">
-          <div class="flow-row">
-            <span class="flow-node">Master Contract</span><span class="flow-arr">→</span>
-            <span class="flow-node">Sub-Orders</span><span class="flow-arr">→</span>
-            <span class="flow-node">Partial Delivery</span><span class="flow-arr">→</span>
-            <span class="flow-node">Delivery Invoice</span><span class="flow-arr">→</span>
-            <span class="flow-node">Contract Utilization</span>
+        <span class="pcard-badge badge-red">B2B Sales</span>
+        <svg class="chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 5.5l5 5 5-5"/></svg>
+      </div>
+      <div class="pcard-body">
+        <div class="flow-strip">
+          <span class="fn">Master Contract</span><span class="fa">→</span>
+          <span class="fn">Sub-Orders</span><span class="fa">→</span>
+          <span class="fn">Partial Delivery</span><span class="fa">→</span>
+          <span class="fn">Delivery Invoice</span><span class="fa">→</span>
+          <span class="fn">Utilization Tracking</span>
+        </div>
+        <div class="pbg">
+          <div class="pb-s">
+            <div class="pb-s-lbl">Problem</div>
+            <p>B2B clients commit to 1,000 units but require call-off deliveries in multiple batches. Invoicing the full amount on partial delivery caused payment disputes and debt reconciliation errors. No system tracked contract utilization in real time.</p>
           </div>
-
-          <div class="pbg">
-            <div class="pb-section">
-              <div class="pb-section-title">Problem</div>
-              <p>Enterprise clients negotiated annual contracts with multiple delivery releases spread across the year. No system tracked how much of a contract had been delivered vs. remaining. Invoicing was manual, error-prone, and often over or under-charged customers.</p>
-            </div>
-            <div class="pb-section">
-              <div class="pb-section-title">Solution</div>
-              <p>Designed a Master Order + sub-order architecture. The master contract holds committed volumes and locked pricing. Sub-orders pull against the master contract. Computed fields update delivered/remaining in real time. Invoices trigger only on confirmed delivery.</p>
-            </div>
-            <div class="pb-section">
-              <div class="pb-section-title">Key Features</div>
-              <ul>
-                <li>Master contract → sub-order linkage</li>
-                <li>Computed remaining_qty per product</li>
-                <li>Delivery-triggered invoice generation</li>
-                <li>Price lock from master agreement</li>
-                <li>Over-delivery validation constraint</li>
-                <li>Contract utilization dashboard widget</li>
-              </ul>
-            </div>
+          <div class="pb-s">
+            <div class="pb-s-lbl">Solution</div>
+            <p>Master Order as immutable contract + sub-orders for each call-off. Computed remaining_qty prevents over-ordering. Backorder mechanism handles partial fulfillment. Invoice policy = 'delivery' ensures billing only matches actual goods delivered.</p>
           </div>
-
-          <div class="pb-section-title" style="margin-bottom:.625rem">Key Logic — Computed Fields & Validation</div>
-          <div class="db-block">
-<span class="db-comment"># Computed remaining quantity</span>
-<span class="db-model">sale.master.contract.line</span>:
-  committed_qty: Float
-  delivered_qty = fields.Float(
-    compute=<span class="db-field">'_compute_delivered'</span>, store=<span class="db-type">True</span>
-  )
+          <div class="pb-s">
+            <div class="pb-s-lbl">Key Features</div>
+            <ul>
+              <li>sale.master.order → sale.master.order.line</li>
+              <li>remaining_qty = committed_qty − delivered_qty</li>
+              <li>Immutable master contract post-confirmation</li>
+              <li>Backorder auto-clones partial fulfillment</li>
+              <li>Constraint: block sub-order qty &gt; remaining</li>
+              <li>Invoice = qty_delivered − qty_invoiced only</li>
+            </ul>
+          </div>
+        </div>
+        <div class="pb-s-lbl" style="margin-bottom:.75rem;color:var(--red)">Algorithm — Computed Fields &amp; Constraints</div>
+        <div class="pdb"><span class="c-model">sale.master.order.line</span>:
+  committed_qty: <span class="c-type">Float</span>
+  delivered_qty = fields.<span class="c-type">Float</span>(
+    compute=<span class="c-field">'_compute_delivered'</span>, store=<span class="c-type">True</span>
+  ) <span class="c-com"># sum of non-cancelled sub-order lines</span>
   remaining_qty = committed_qty - delivered_qty
 
-<span class="db-comment"># Validation: prevent over-delivery</span>
-@api.constrains(<span class="db-field">'delivered_qty'</span>)
-def _check_qty(self):
-  if self.delivered_qty > self.committed_qty:
-    raise ValidationError(<span class="db-field">"Exceeds contract volume"</span>)
+<span class="c-com"># Constraint: block over-delivery</span>
+@api.constrains(<span class="c-field">'qty_ordered'</span>)
+def _check_remaining(self):
+  if qty_ordered > master_line.remaining_qty:
+    raise ValidationError(<span class="c-field">"Exceeds contract volume"</span>)
 
-<span class="db-comment"># Invoice trigger on delivery</span>
-invoice_policy = <span class="db-field">'delivery'</span> <span class="db-comment">← on sale.order</span>
-          </div>
-
-          <div class="impact-strip">
-            <div class="impact-label">Business Impact</div>
-            <p>Sales and finance teams gained real-time contract fulfillment visibility for the first time. Eliminated over-invoicing risk by tying invoice generation directly to confirmed deliveries. Account managers can proactively alert clients when approaching contract limits — reducing disputes and improving client trust.</p>
-          </div>
+<span class="c-com"># Invoice policy</span>
+invoice_policy = <span class="c-field">'delivery'</span>  <span class="c-com">← on sale.order</span></div>
+        <div class="impact-box">
+          <div class="impact-lbl">Business Impact</div>
+          <p>Sales and finance gained real-time contract utilization visibility. Eliminated over-invoicing risk — all invoices tied to confirmed deliveries. Account managers proactively alert clients near contract limits, reducing disputes and improving trust.</p>
         </div>
       </div>
+    </div>
 
-      <!-- ── PROJECT 3 ── -->
-      <div class="proj-card reveal reveal-d2" onclick="toggleProj(this)">
-        <div class="proj-header">
-          <div class="proj-header-left">
-            <span class="proj-idx">03</span>
-            <div>
-              <div class="proj-title">Education CRM — Admissions System</div>
-              <div class="proj-subtitle">CRM · Custom Module · Financial Logic</div>
-            </div>
+    <!-- ── PROJECT 3 — red ── -->
+    <div class="pcard" onclick="tp(this)">
+      <div class="pcard-head">
+        <div class="pcard-head-left">
+          <span class="pcard-idx">03</span>
+          <div>
+            <div class="pcard-title">Education CRM — Admissions Pipeline</div>
+            <div class="pcard-sub">CRM · K-12 · Delegation Inheritance · Financials</div>
           </div>
-          <span class="proj-badge pb-green">CRM / Custom</span>
-          <svg class="chevron" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 6.5l5 5 5-5"/></svg>
         </div>
-        <div class="proj-body">
-          <div class="flow-row">
-            <span class="flow-node">Parent Lead</span><span class="flow-arr">→</span>
-            <span class="flow-node">Student Profile</span><span class="flow-arr">→</span>
-            <span class="flow-node">Level Assessment</span><span class="flow-arr">→</span>
-            <span class="flow-node">Sibling Discount</span><span class="flow-arr">→</span>
-            <span class="flow-node">Enrollment</span>
+        <span class="pcard-badge badge-cream">CRM / Custom</span>
+        <svg class="chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 5.5l5 5 5-5"/></svg>
+      </div>
+      <div class="pcard-body">
+        <div class="flow-strip">
+          <span class="fn">Parent Lead</span><span class="fa">→</span>
+          <span class="fn">Application</span><span class="fa">→</span>
+          <span class="fn">Level Assessment</span><span class="fa">→</span>
+          <span class="fn">Sibling Discount</span><span class="fa">→</span>
+          <span class="fn">Enrollment</span>
+        </div>
+        <div class="pbg">
+          <div class="pb-s">
+            <div class="pb-s-lbl">Problem</div>
+            <p>Manage parents (payers) separately from students (learners). Admissions pipelines differ completely between levels (Nursery vs. Secondary). One mother enrolling two children at different levels required duplicate contact records — causing data inconsistency.</p>
           </div>
-
-          <div class="pbg">
-            <div class="pb-section">
-              <div class="pb-section-title">Problem</div>
-              <p>An education center needed a CRM for admissions where the parent is the payer (customer) but each child is the enrolled student. Standard CRM had no parent-child data relationship, no dynamic UI by education level, and no automatic sibling discount logic.</p>
-            </div>
-            <div class="pb-section">
-              <div class="pb-section-title">Solution</div>
-              <p>Used Odoo Delegation Inheritance (_inherits) to model Student as an extension of res.partner — inheriting all contact data via FK. Dynamic UI rendered conditionally by education level using attrs. Financial logic auto-calculates sibling discounts and validates payment status before enrollment confirmation.</p>
-            </div>
-            <div class="pb-section">
-              <div class="pb-section-title">Key Features</div>
-              <ul>
-                <li>Delegation inheritance (Student → res.partner)</li>
-                <li>Dynamic UI by level (Nursery/Primary/Secondary)</li>
-                <li>Sibling discount auto-calculation</li>
-                <li>Payment check before enrollment confirm</li>
-                <li>Admissions pipeline in Kanban view</li>
-                <li>Academic term tracking per student</li>
-              </ul>
-            </div>
+          <div class="pb-s">
+            <div class="pb-s-lbl">Solution</div>
+            <p>Delegation Inheritance links education.application to res.partner for payer data reuse without duplication. Dynamic UI via attrs hides/shows fields by education_level. Sibling discount auto-computed. Payment + test score validation blocks premature enrollment.</p>
           </div>
-
-          <div class="pb-section-title" style="margin-bottom:.625rem">Data Structure & Dynamic UI Logic</div>
-          <div class="db-block">
-<span class="db-model">education.student</span>
-  _inherits = {<span class="db-field">'res.partner'</span>: <span class="db-field">'partner_id'</span>}
-  <span class="db-comment"># Inherits: name, phone, email, address</span>
-
-  <span class="db-field">education_level</span>: Selection[nursery, primary, secondary]
-  <span class="db-field">parent_id</span>: Many2one(res.partner)  <span class="db-comment">← payer</span>
-  <span class="db-field">sibling_ids</span>: One2many(education.student)
-
-<span class="db-comment"># Dynamic UI (attrs by level)</span>
-&lt;field name="subject_stream"
-  attrs="{'invisible':[('level','!=','secondary')]}"/&gt;
-
-<span class="db-comment"># Sibling discount logic</span>
-sibling_discount = len(sibling_ids) * 5%  <span class="db-comment">← max 15%</span>
-
-<span class="db-comment"># Payment validation constraint</span>
-@api.constrains('state')
-def _check_payment(self):
-  if self.state == 'enrolled' and not self.payment_cleared:
-    raise ValidationError("Payment required before enrollment")
+          <div class="pb-s">
+            <div class="pb-s-lbl">Key Features</div>
+            <ul>
+              <li>education.parent + education.application via phone</li>
+              <li>_inherits → res.partner: no contact duplication</li>
+              <li>Nursery: show vaccination book, hide test_score</li>
+              <li>Secondary: test_score required (attrs)</li>
+              <li>is_sibling computed → auto sibling discount</li>
+              <li>Block "Enrolled" if paid_amount = 0 or test_score = 0</li>
+              <li>Prorated fee on withdrawal (per month studied)</li>
+              <li>Auto Student_ID on sale confirmation</li>
+            </ul>
           </div>
+        </div>
+        <div class="pb-s-lbl" style="margin-bottom:.75rem;color:var(--gold)">Data Structure &amp; Dynamic UI</div>
+        <div class="pdb"><span class="c-model">education.application</span>:
+  _inherits = {<span class="c-field">'res.partner'</span>: <span class="c-field">'partner_id'</span>}
+  <span class="c-com"># Inherits: name, phone, email, address</span>
 
-          <div class="impact-strip">
-            <div class="impact-label">Business Impact</div>
-            <p>The _inherits architecture eliminated data duplication between student and contact records — one update flows through both systems. Dynamic UI reduced form errors (admissions staff no longer see irrelevant fields). Sibling discount automation removed a manual step that previously required spreadsheet lookup, cutting per-family enrollment processing time significantly.</p>
-          </div>
+  <span class="c-field">education_level</span>: Selection[nursery|primary|secondary]
+  <span class="c-field">parent_id</span>: Many2one(res.partner)  <span class="c-com">← payer</span>
+  <span class="c-field">is_sibling</span>: computed → activates discount
+
+<span class="c-com"># Dynamic attrs</span>
+&lt;field name=<span class="c-field">"vaccination_book"</span>
+  attrs=<span class="c-field">"{'invisible':[('level','!=','nursery')]}"</span>/&gt;
+&lt;field name=<span class="c-field">"test_score"</span>
+  attrs=<span class="c-field">"{'required':[('level','=','secondary')]}"</span>/&gt;
+
+<span class="c-com"># Prorated = months_studied / total × fee</span></div>
+        <div class="impact-box">
+          <div class="impact-lbl">Business Impact</div>
+          <p>Delegation inheritance eliminated contact duplication for multi-child families. Dynamic UI reduced form errors. Sibling discount automation removed spreadsheet lookup steps. Payment validation prevents enrollment without financial clearance. Prorated fee calculation handled withdrawals fairly.</p>
         </div>
       </div>
+    </div>
 
-      <!-- ── PROJECT 4 ── -->
-      <div class="proj-card reveal reveal-d3" onclick="toggleProj(this)">
-        <div class="proj-header">
-          <div class="proj-header-left">
-            <span class="proj-idx">04</span>
-            <div>
-              <div class="proj-title">Omnichannel Sales & POS</div>
-              <div class="proj-subtitle">Sales · POS · eCommerce · Returns</div>
-            </div>
+    <!-- ── PROJECT 4 — cream ── -->
+    <div class="pcard cream-card" onclick="tp(this)">
+      <div class="pcard-head">
+        <div class="pcard-head-left">
+          <span class="pcard-idx">04</span>
+          <div>
+            <div class="pcard-title">Omnichannel Sales &amp; POS</div>
+            <div class="pcard-sub">Sales · POS · eCommerce · Exchange Logic</div>
           </div>
-          <span class="proj-badge pb-rose">Omnichannel</span>
-          <svg class="chevron" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 6.5l5 5 5-5"/></svg>
         </div>
-        <div class="proj-body">
-          <div class="flow-row">
-            <span class="flow-node">SKU / Barcode Setup</span><span class="flow-arr">→</span>
-            <span class="flow-node">Online + POS Sale</span><span class="flow-arr">→</span>
-            <span class="flow-node">Unified Stock</span><span class="flow-arr">→</span>
-            <span class="flow-node">Exchange / Return</span><span class="flow-arr">→</span>
-            <span class="flow-node">Revenue Reconciliation</span>
+        <span class="pcard-badge badge-red">Omnichannel</span>
+        <svg class="chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 5.5l5 5 5-5"/></svg>
+      </div>
+      <div class="pcard-body">
+        <div class="flow-strip">
+          <span class="fn">Master Data (SKU/Barcode)</span><span class="fa">→</span>
+          <span class="fn">POS + Online</span><span class="fa">→</span>
+          <span class="fn">Unified Stock</span><span class="fa">→</span>
+          <span class="fn">Exchange / Return</span><span class="fa">→</span>
+          <span class="fn">Revenue Reconciliation</span>
+        </div>
+        <div class="pbg">
+          <div class="pb-s">
+            <div class="pb-s-lbl">Problem</div>
+            <p>Retailer with webshop + physical POS had no unified stock. Return refunds used current prices instead of original transaction price, causing accounting disputes. Pre-orders had no tracking. POS errors had no structured correction process.</p>
           </div>
-
-          <div class="pbg">
-            <div class="pb-section">
-              <div class="pb-section-title">Problem</div>
-              <p>A retailer with both a webshop and physical POS had no unified inventory view. Returns at POS used current prices instead of original purchase prices — causing refund discrepancies. Pre-orders had no systematic handling, and error transactions lacked a correction workflow.</p>
-            </div>
-            <div class="pb-section">
-              <div class="pb-section-title">Solution</div>
-              <p>Integrated Odoo Sales, eCommerce, and POS into a single inventory source of truth. Designed return logic that locks refund amount to the original invoice price. Pre-order flow uses deposit payment with stock reservation. Error transaction handling with manager override and correction journal entry.</p>
-            </div>
-            <div class="pb-section">
-              <div class="pb-section-title">Key Features</div>
-              <ul>
-                <li>Master data: SKU, barcode, variant matrix</li>
-                <li>Shared real-time stock across all channels</li>
-                <li>Original-price lock on returns/exchanges</li>
-                <li>Pre-order: deposit → reservation → fulfill</li>
-                <li>Price difference handling on exchange</li>
-                <li>Error transaction correction workflow</li>
-                <li>Cross-channel revenue dashboard</li>
-              </ul>
-            </div>
+          <div class="pb-s">
+            <div class="pb-s-lbl">Solution</div>
+            <p>Unified Sales + eCommerce + POS on single inventory. Return logic locks refund to original invoice price. Pre-order uses deposit + stock reservation. Error transaction creates a revenue-correction sale without re-deducting stock.</p>
           </div>
-
-          <div class="pb-section-title" style="margin-bottom:.625rem">Exchange & Pre-Order Logic</div>
-          <div class="db-block">
-<span class="db-comment"># Return/Exchange: price locked to original</span>
+          <div class="pb-s">
+            <div class="pb-s-lbl">Key Features</div>
+            <ul>
+              <li>SKU, ISBN, Barcode + Product Variants (Size, Color)</li>
+              <li>Separate tax rules per product category</li>
+              <li>POS: barcode scan → instant stock + e-invoice</li>
+              <li>Pre-order: deposit → reserve → arrival alert</li>
+              <li>Exchange: new_price &gt; orig → additional invoice</li>
+              <li>Exchange: same price → stock swap, no invoice</li>
+              <li>Error: cancel + new sale, no double stock deduction</li>
+            </ul>
+          </div>
+        </div>
+        <div class="pb-s-lbl" style="margin-bottom:.75rem;color:var(--red)">Exchange &amp; Error Transaction Logic</div>
+        <div class="pdb"><span class="c-com"># Return: price locked to original invoice</span>
 original_price = pos_order_line.price_unit
-<span class="db-comment"># NOT product.lst_price (current price)</span>
-refund_amount = original_price * return_qty
-price_diff = current_price - original_price
-<span class="db-comment"># if exchange: customer pays/receives diff</span>
+<span class="c-com"># NOT product.lst_price (prevents price drift)</span>
+refund_amount = original_price × return_qty
 
-<span class="db-comment"># Pre-order state machine</span>
-draft → deposit_paid → stock_reserved
-  → delivery_ready → fulfilled
+<span class="c-com"># Exchange price comparison</span>
+price_diff = new_price - original_price
+if price_diff > 0: create_additional_invoice(price_diff)
+if price_diff == 0: stock_swap_only()  <span class="c-com"># no invoice</span>
 
-<span class="db-comment"># Error transaction: manager correction</span>
-error_transaction.state = 'flagged'
-manager.approve() → correction_entry
-<span class="db-comment"># audit log preserved, not deleted</span>
-          </div>
+<span class="c-com"># Pre-order state machine</span>
+draft → deposit_paid → reserved → fulfilled
 
-          <div class="impact-strip">
-            <div class="impact-label">Business Impact</div>
-            <p>Unified inventory eliminated weekly manual stock reconciliation between channels. Return price accuracy removed a significant source of accounting disputes — all refunds now precisely match original transaction amounts. Pre-order system reduced stockout-related lost sales by enabling reservations. Error correction workflow replaced ad-hoc cash drawer adjustments with a traceable, auditable process.</p>
-          </div>
+<span class="c-com"># Error correction: revenue only, no stock</span>
+cancel_error_invoice()
+new_sale(stock_move=False)  <span class="c-com"># revenue-only</span></div>
+        <div class="impact-box">
+          <div class="impact-lbl">Business Impact</div>
+          <p>Unified inventory eliminated weekly manual reconciliation between channels. Return accuracy removed the main source of accounting disputes. Pre-order system reduced stockout-related lost sales. Error correction replaced ad-hoc cash adjustments with a traceable, auditable process.</p>
         </div>
       </div>
+    </div>
 
-      <!-- ── PROJECT 5 ── -->
-      <div class="proj-card reveal reveal-d4" style="grid-column:1/-1" onclick="toggleProj(this)">
-        <div class="proj-header">
-          <div class="proj-header-left">
-            <span class="proj-idx">05</span>
-            <div>
-              <div class="proj-title">Transit Inventory System — Multi-Warehouse Hub</div>
-              <div class="proj-subtitle">Inventory · Logistics · Automation · Exception Handling</div>
-            </div>
+    <!-- ── PROJECT 5 — wide, red ── -->
+    <div class="pcard wide" onclick="tp(this)">
+      <div class="pcard-head">
+        <div class="pcard-head-left">
+          <span class="pcard-idx">05</span>
+          <div>
+            <div class="pcard-title">Transit Inventory System — In-Transit Warehouse Hub</div>
+            <div class="pcard-sub">Inventory · Logistics · State Machine · Cron Automation · Exception Handling</div>
           </div>
-          <span class="proj-badge pb-green">Inventory</span>
-          <svg class="chevron" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 6.5l5 5 5-5"/></svg>
         </div>
-        <div class="proj-body">
-          <div class="flow-row">
-            <span class="flow-node">Warehouse A (Source)</span><span class="flow-arr">→</span>
-            <span class="flow-node">Transit Hub (Virtual)</span><span class="flow-arr">→</span>
-            <span class="flow-node">ASN Email Auto</span><span class="flow-arr">→</span>
-            <span class="flow-node">Warehouse B (Destination)</span><span class="flow-arr">→</span>
-            <span class="flow-node">Discrepancy Handling</span><span class="flow-arr">→</span>
-            <span class="flow-node">Reconciliation</span>
+        <span class="pcard-badge badge-gold">Inventory</span>
+        <svg class="chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 5.5l5 5 5-5"/></svg>
+      </div>
+      <div class="pcard-body">
+        <div class="flow-strip">
+          <span class="fn">Warehouse A</span><span class="fa">→</span>
+          <span class="fn">STR Approval</span><span class="fa">→</span>
+          <span class="fn">Wizard Popup</span><span class="fa">→</span>
+          <span class="fn">Transit Hub (Virtual)</span><span class="fa">→</span>
+          <span class="fn">ASN Email</span><span class="fa">→</span>
+          <span class="fn">Warehouse B</span><span class="fa">→</span>
+          <span class="fn">Done / Discrepancy</span>
+        </div>
+        <div class="pbg">
+          <div class="pb-s">
+            <div class="pb-s-lbl">Problem</div>
+            <p>North-South shipments take 3–5 days. High-value inventory "disappeared" from the system during transit — no visibility, no accountability between warehouse keepers, no structured handling for damaged or missing items on arrival. Discrepancies had nowhere to go.</p>
           </div>
-
-          <div class="pbg">
-            <div class="pb-section">
-              <div class="pb-section-title">Problem</div>
-              <p>A company with multiple warehouses needed goods to pass through a central transit hub before reaching their destination. In-transit stock was invisible in the system — creating a "black hole" between dispatch and receipt. Discrepancies (damaged/missing items) had no structured handling process, leading to untracked inventory losses.</p>
-            </div>
-            <div class="pb-section">
-              <div class="pb-section-title">Solution</div>
-              <p>Configured Odoo multi-step warehouse routing with Transit Location as a virtual intermediate warehouse. ASN (Advance Shipping Notice) emails auto-trigger when goods leave the source warehouse. A full state machine governs the transfer lifecycle. Discrepancy workflow allows partial receipt with automatic backorder creation and variance logging for audit.</p>
-            </div>
-            <div class="pb-section">
-              <div class="pb-section-title">Key Features</div>
-              <ul>
-                <li>A → Transit → B three-step routing</li>
-                <li>Virtual transit location (always in balance)</li>
-                <li>Automated ASN email on dispatch confirmation</li>
-                <li>Real-time in-transit stock visibility</li>
-                <li>Discrepancy: partial receipt + backorder</li>
-                <li>Cron job: escalation email if in-transit &gt; X days</li>
-                <li>Transfer reconciliation report by period</li>
-              </ul>
-            </div>
+          <div class="pb-s">
+            <div class="pb-s-lbl">Solution</div>
+            <p>stock.transfer.request (STR) model with full state machine. Transit Hub as virtual warehouse maintains stock balance visibility at all times. ASN auto-email on shipping. Cron job escalation for overdue transfers at 23:00. Wizard popup enforces condition declaration before dispatch commitment.</p>
           </div>
+          <div class="pb-s">
+            <div class="pb-s-lbl">Key Features</div>
+            <ul>
+              <li>STR: Draft → To Approve → Approved → Shipping → Done/Discrepancy</li>
+              <li>Source stock ↓ → Transit ↑ → Destination ↑ on receipt</li>
+              <li>ASN email auto-triggers on state = "Shipping"</li>
+              <li>Cron 23:00: scan scheduled_date + 5/7/10 day alerts</li>
+              <li>Wizard popup: "No issues" OR select issue type (required)</li>
+              <li>Issue types in Inventory &gt; Configuration &gt; Transfer Issues</li>
+              <li>Partial receipt → Discrepancy state → accounting compensation</li>
+            </ul>
+          </div>
+        </div>
+        <div class="pb-s-lbl" style="margin-bottom:.75rem;color:var(--gold)">State Machine, Cron &amp; Exception Handling</div>
+        <div class="pdb" style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem"><div><span class="c-com"># STR State Machine</span>
+Draft → To Approve
+  → Approved → Shipping
+  → Done | Discrepancy
 
-          <div class="pb-section-title" style="margin-bottom:.625rem">State Machine & Cron Automation</div>
-          <div class="db-block">
-<span class="db-comment"># State machine: stock.picking (transfer)</span>
-draft → confirmed → assigned → in_transit
-  → partially_received → done | discrepancy
+<span class="c-com"># Transit location balance</span>
+WHA → TRANSIT: qty out of WHA
+               qty into TRANSIT
+TRANSIT → WHB: qty out of TRANSIT
+               qty into WHB
+<span class="c-com"># Partial receipt → Discrepancy state</span></div><div><span class="c-com"># ASN trigger on state write</span>
+on_write(state=<span class="c-field">'shipping'</span>):
+  send_mail(asn_template_id)
 
-<span class="db-comment"># Transit location: always zero net balance</span>
-WHA → TRANSIT: move qty OUT of WHA INTO TRANSIT
-TRANSIT → WHB: move qty OUT of TRANSIT INTO WHB
-<span class="db-comment"># If WHB partial receipt → backorder auto-created</span>
-
-<span class="db-comment"># Automated ASN email trigger</span>
-ir.actions.server → send_mail(template_id)
-trigger: on write, state = 'in_transit'
-
-<span class="db-comment"># Cron: escalation if stuck in transit</span>
-@api.model
+<span class="c-com"># Cron 23:00 — escalation</span>
 def _cron_transit_alert(self):
   overdue = self.search([
-    ('state','=','in_transit'),
-    ('scheduled_date','&lt;', today - 3 days)
+    (<span class="c-field">'state'</span>,<span class="c-field">'='</span>,<span class="c-field">'shipping'</span>),
+    (<span class="c-field">'sched_date'</span>,<span class="c-field">'&lt;'</span>, today-5)
   ])
-  overdue.mapped('send_escalation_email')()
+  overdue.send_escalation_email()
 
-<span class="db-comment"># Discrepancy variance log</span>
-expected_qty vs received_qty → variance_line
-variance_line.responsible_id = warehouse_manager
-          </div>
-
-          <div class="impact-strip">
-            <div class="impact-label">Business Impact</div>
-            <p>Eliminated the "in-transit black hole" — logistics teams now have live visibility of all stock between warehouses at any moment. ASN automation reduced Warehouse B preparation time significantly. The cron escalation prevented goods from sitting unprocessed in transit for days unnoticed. Discrepancy handling ensured every variance is recorded and assigned — improving inventory accuracy across the entire distribution network and enabling accurate financial valuation of in-transit goods.</p>
-          </div>
+<span class="c-com"># Wizard popup validation</span>
+if not wizard.no_issues:
+  if not wizard.issue_type_id:
+    raise ValidationError(
+      "Select issue type or confirm OK"
+    )</div></div>
+        <div class="impact-box">
+          <div class="impact-lbl">Business Impact</div>
+          <p>Eliminated the in-transit "black hole" — logistics teams have live stock visibility between all warehouses. ASN automation reduced Warehouse B preparation time. Cron escalation prevents goods sitting unprocessed for days unnoticed. Wizard popup created a clear responsibility handoff — warehouse keepers must formally commit to condition before dispatch. Discrepancy state ensures every variance is recorded and assigned for accounting compensation, improving inventory accuracy network-wide.</p>
         </div>
       </div>
+    </div>
 
+  </div><!-- /proj-grid -->
+</section>
+
+<!-- ══════════════════════════════════════
+     CERTIFICATES
+══════════════════════════════════════ -->
+<section id="certs" class="page-section cream-2-section">
+  <span class="bleed-type bleed-on-cream cert-bleed">CERT.</span>
+  <div class="inner">
+    <div class="eyebrow eyebrow-ink rv" style="margin-bottom:2.5rem">04 — Credentials &amp; Certificates</div>
+    <div class="certs-layout">
+
+      <!-- sidebar -->
+      <div class="certs-sidebar rv">
+        <div>
+          <div class="certs-side-num">03</div>
+          <div class="certs-side-title">Verified<br><em>Credentials</em></div>
+        </div>
+        <p class="certs-side-sub">Professional certifications in business analysis and process modeling that underpin the practical ERP work shown in the projects above.</p>
+      </div>
+
+      <!-- certificate cards — each is a full <a> tag, fully clickable -->
+      <div class="certs-cards">
+
+        <a href="certificate1.pdf" target="_blank" rel="noopener noreferrer" class="cert-card rv">
+          <div class="cert-num-large">I</div>
+          <div class="cert-content">
+            <div class="cert-title">Fundamental Business Analysis</div>
+            <p class="cert-org">Core BA competencies — elicitation techniques, requirements analysis, documentation, stakeholder communication, and foundational BA frameworks applied to enterprise systems.</p>
+            <span class="cert-btn">
+              <svg width="13" height="13" viewBox="0 0 12 12" fill="none"><path d="M6 1v7M3 5.5l3 3 3-3M1.5 11h9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              View Certificate
+            </span>
+          </div>
+        </a>
+
+        <a href="certificate2.pdf" target="_blank" rel="noopener noreferrer" class="cert-card rv d1">
+          <div class="cert-num-large">II</div>
+          <div class="cert-content">
+            <div class="cert-title">Business Analysis Foundations</div>
+            <p class="cert-org">Advanced BA frameworks aligned with BABOK — enterprise analysis, solution assessment, validation techniques, and structured requirement traceability for complex business systems.</p>
+            <span class="cert-btn">
+              <svg width="13" height="13" viewBox="0 0 12 12" fill="none"><path d="M6 1v7M3 5.5l3 3 3-3M1.5 11h9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              View Certificate
+            </span>
+          </div>
+        </a>
+
+        <a href="certificate3.pdf" target="_blank" rel="noopener noreferrer" class="cert-card rv d2">
+          <div class="cert-num-large">III</div>
+          <div class="cert-content">
+            <div class="cert-title">Business Process Modeling</div>
+            <p class="cert-org">BPMN 2.0 notation, process documentation standards, workflow gap analysis, and AS-IS / TO-BE transformation design methodologies for ERP implementation projects.</p>
+            <span class="cert-btn">
+              <svg width="13" height="13" viewBox="0 0 12 12" fill="none"><path d="M6 1v7M3 5.5l3 3 3-3M1.5 11h9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              View Certificate
+            </span>
+          </div>
+        </a>
+
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ══════════════════════════════════════ CERTIFICATES -->
-<section id="certs">
-  <div class="wrap">
-    <div class="sec-eyebrow reveal"><span class="eyebrow-line"></span><span class="eyebrow-text">Certificates</span></div>
-    <h2 class="sec-title reveal">Verified credentials</h2>
-    <p class="sec-sub reveal">Professional certifications in business analysis and process modeling that underpin the practical work shown in the projects above.</p>
-
-    <div class="cert-grid">
-      <div class="cert-card reveal">
-        <div class="cert-icon">🎓</div>
-        <div class="cert-title">Fundamental Business Analysis</div>
-        <div class="cert-org">Core BA competencies — elicitation, analysis, requirements documentation, and stakeholder communication fundamentals.</div>
-        <a href="certificate1.pdf" target="_blank" class="btn-cert">
-          <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M6.5 1v7M3.5 5.5l3 3 3-3M2 11h9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          View Certificate
-        </a>
-      </div>
-      <div class="cert-card reveal reveal-d1">
-        <div class="cert-icon">📊</div>
-        <div class="cert-title">Business Analysis Foundations</div>
-        <div class="cert-org">Advanced BA frameworks — BABOK-aligned methodologies, enterprise analysis, solution assessment, and validation techniques.</div>
-        <a href="certificate2.pdf" target="_blank" class="btn-cert">
-          <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M6.5 1v7M3.5 5.5l3 3 3-3M2 11h9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          View Certificate
-        </a>
-      </div>
-      <div class="cert-card reveal reveal-d2">
-        <div class="cert-icon">🗺️</div>
-        <div class="cert-title">Business Process Modeling</div>
-        <div class="cert-org">BPMN 2.0 notation, process documentation standards, workflow analysis, and AS-IS / TO-BE transformation techniques.</div>
-        <a href="certificate3.pdf" target="_blank" class="btn-cert">
-          <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M6.5 1v7M3.5 5.5l3 3 3-3M2 11h9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          View Certificate
-        </a>
-      </div>
+<!-- ══════════════════════════════════════
+     CONTACT
+══════════════════════════════════════ -->
+<section id="contact" class="page-section">
+  <div class="contact-grid">
+    <div class="contact-left">
+      <span class="bleed-type bleed-on-red ct-bleed">NGOC.</span>
+      <div class="eyebrow eyebrow-cream rv" style="margin-bottom:2rem">05 — Get in Touch</div>
+      <div class="contact-big rv d1">Let's work<br><em>together.</em></div>
+      <p class="contact-sub rv d2">Actively seeking an ERP Business Analyst or Odoo Functional Consultant internship — ready to contribute real analytical work and grow within the Odoo ecosystem from day one.</p>
+      <div class="open-tag rv d3"><span class="open-dot"></span>Open for Internship · 2025</div>
     </div>
-  </div>
-</section>
-
-<!-- ══════════════════════════════════════ CONTACT -->
-<section id="contact">
-  <div class="wrap">
-    <div class="sec-eyebrow reveal"><span class="eyebrow-line"></span><span class="eyebrow-text">Contact</span></div>
-    <h2 class="sec-title reveal">Let's work together</h2>
-    <p class="sec-sub reveal">I'm actively seeking an ERP Business Analyst or Odoo Functional Consultant internship where I can contribute real analytical work and grow within the Odoo ecosystem.</p>
-    <div class="open-tag reveal">
-      <span class="ot-dot"></span>
-      Open for internship opportunities · 2025
-    </div>
-    <div class="contact-row" style="margin-top:2rem">
-      <a href="tel:0377648013" class="contact-card reveal">
+    <div class="contact-right">
+      <a href="tel:0377648013" class="cc rv">
         <div class="cc-label">Phone</div>
         <div class="cc-value">0377 648 013</div>
-        <div class="cc-note">Available Mon – Sat, 8am – 8pm</div>
+        <div class="cc-note">Available Monday – Saturday, 8am – 8pm</div>
       </a>
-      <a href="mailto:ngoc.huynh@email.com" class="contact-card reveal reveal-d1">
+      <a href="mailto:ngoc.huynh@email.com" class="cc rv d1">
         <div class="cc-label">Email</div>
         <div class="cc-value">ngoc.huynh@email.com</div>
         <div class="cc-note">Usually replies within 24 hours</div>
       </a>
+      <div class="cc rv d2" style="cursor:default">
+        <div class="cc-label">Location</div>
+        <div class="cc-value">Ho Chi Minh City</div>
+        <div class="cc-note">Vietnam · Open to relocation</div>
+      </div>
     </div>
   </div>
 </section>
 
+<!-- ══ FOOTER ══ -->
 <footer>
-  <p>Huynh Thi Bich Ngoc · Odoo ERP Business Analyst · Ho Chi Minh City · 2025</p>
+  <span class="footer-left">Ngoc · ERP Portfolio · 2025</span>
+  <span class="footer-right">Huynh Thi Bich Ngoc — Odoo Business Analyst · Ho Chi Minh City</span>
 </footer>
 
 <script>
-function toggleProj(card){card.classList.toggle('open')}
+function tp(card){ card.classList.toggle('open'); }
 
 const io = new IntersectionObserver((entries)=>{
-  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on')}})
-},{threshold:0.1});
-document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('on'); });
+},{ threshold:0.08 });
+document.querySelectorAll('.rv,.rv-l').forEach(el=>io.observe(el));
 </script>
 </body>
 </html>
